@@ -29,3 +29,7 @@
 	  (lambda ()
 	    (setq indent-tabs-mode nil)
 	    (define-key haml-mode-map "\C-m" 'newline-and-indent)))
+
+; django mode
+(add-to-list 'load-path "/folder/containing/file")
+(require 'python-django)
