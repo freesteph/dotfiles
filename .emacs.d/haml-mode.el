@@ -30,8 +30,9 @@
 (require 'css-mode nil t)
 (require 'textile-mode nil t)
 (require 'markdown-mode nil t)
-(require 'javascript-mode "javascript" t)
-(require 'js nil t)
+(or
+ (require 'js nil t)
+ (require 'javascript-mode "javascript" t))
 
 
 ;; User definable variables
@@ -281,6 +282,7 @@ For example, this will highlight all of the following:
           (case (char-after)
             ;; Highlight obj refs
             (?\[
+             (forward-char 1)
              (let ((beg (point)))
                (haml-limited-forward-sexp eol)
                (haml-fontify-region-as-ruby beg (point))))
@@ -414,38 +416,35 @@ extend the font lock region."
   "Extend the font-lock region to encompass any current -/=/~ line."
   (haml-extend-region-to-containing-block haml-ruby-script-re))
 
-(defun* haml-extend-region-multiline-hashes ()
+(defun haml-extend-region-multiline-hashes ()
   "Extend the font-lock region to encompass multiline attribute hashes."
-  (let ((old-beg font-lock-beg)
-        (old-end font-lock-end))
-    (save-excursion
-      (goto-char font-lock-beg)
-      (let ((attr-props (haml-parse-multiline-attr-hash))
-            multiline-end)
-        (when attr-props
-          (setq font-lock-beg (cdr (assq 'point attr-props)))
+  (haml-maybe-extend-region
+   (lambda ()
+     (let ((attr-props (haml-parse-multiline-attr-hash))
+           multiline-end
+           start)
+       (when attr-props
+         (setq start (cdr (assq 'point attr-props)))
 
-          (end-of-line)
-          ;; Move through multiline attrs
-          (when (eq (char-before) ?,)
-            (save-excursion
-              (while (progn (end-of-line)
-                            (and (eq (char-before) ?,) (not (eobp))))
-                (forward-line))
+         (end-of-line)
+         ;; Move through multiline attrs
+         (when (eq (char-before) ?,)
+           (save-excursion
+             (while (progn (end-of-line)
+                           (and (eq (char-before) ?,) (not (eobp))))
+               (forward-line))
 
-              (forward-line -1)
-              (end-of-line)
-              (setq multiline-end (point))))
+             (forward-line -1)
+             (end-of-line)
+             (setq multiline-end (point))))
 
-          (goto-char (+ (cdr (assq 'point attr-props))
-                        (cdr (assq 'hash-indent attr-props))
-                        -1))
-          (haml-limited-forward-sexp
-           (or multiline-end
-               (save-excursion (end-of-line) (point))))
-          (setq font-lock-end (max font-lock-end (point))))))
-    (or (/= old-beg font-lock-beg)
-        (/= old-end font-lock-end))))
+         (goto-char (+ (cdr (assq 'point attr-props))
+                       (cdr (assq 'hash-indent attr-props))
+                       -1))
+         (haml-limited-forward-sexp
+          (or multiline-end
+              (save-excursion (end-of-line) (point))))
+         (cons start (point)))))))
 
 (defun haml-extend-region-contextual ()
   "Extend the font lock region piecemeal.
@@ -454,7 +453,6 @@ The result of calling this function repeatedly until it returns
 nil is that (FONT-LOCK-BEG . FONT-LOCK-END) will be the smallest
 possible region in which font-locking could be affected by
 changes in the initial region."
-  (message "Extending (%s . %s)" font-lock-beg font-lock-end)
   (or
    (haml-extend-region-filter)
    (haml-extend-region-comment)
@@ -470,6 +468,7 @@ changes in the initial region."
   (let ((table (make-syntax-table)))
     (modify-syntax-entry ?: "." table)
     (modify-syntax-entry ?_ "w" table)
+    (modify-syntax-entry ?' "\"" table)
     table)
   "Syntax table in use in `haml-mode' buffers.")
 
