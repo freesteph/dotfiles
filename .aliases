@@ -1,3 +1,6 @@
 alias sgrep='grep -RHn --color=auto'
 alias ls='ls -G'
 alias l='ls -l'
+alias pg_start='pg_ctl start -D /usr/local/var/postgres -l /usr/local/var/postgres/log'
+alias bs='bundle exec rspec'
+alias deldot='find . -name "\.\#*" -print | xargs rm -rf'

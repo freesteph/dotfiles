@@ -5,3 +5,9 @@ endif
 syntax enable
 set background=dark
 colorscheme solarized
+
+set autoindent
+set smartindent
+set shiftwidth=2
+set expandtab
+

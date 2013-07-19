@@ -3,3 +3,5 @@
 [user]
 	name = Stéphane Maniaci
 	email = stephane.maniaci@gmail.com
+[push]
+	default = simple
