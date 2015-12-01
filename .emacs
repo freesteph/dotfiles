@@ -1,106 +1,127 @@
-; load path
-(add-to-list 'load-path "~/.emacs.d")
 
-; useless chrome
+;; useless chrome
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-; default font
+;; default font
 (set-face-attribute 'default nil :family "Inconsolata" :height 140)
 
-; color theme
-(require 'color-theme)
-(require 'solarized)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'solarized-dark t)
+;; packages
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
-; less css mode
-(require 'less-css-mode)
-
-; haml mode
-(require 'haml-mode)
-
-; ido mode
+;; ido mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
 
-; moz-reload
-(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
-(autoload 'moz-reload-on-save-mode' "moz-reload-on-save-mode" "Mozilla save on reload" t)
-
-; don't clutter up the tree with autosave files, push them to /tmp or something
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
-(add-hook 'haml-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode nil)
-	    (define-key haml-mode-map "\C-m" 'newline-and-indent)))
-
-; mac keys
+;; mac keys
 (setq mac-command-modifier 'meta
       mac-option-modifier 'super)
 
-; IRC track mode
-(add-hook 'rcirc-mode-hook
-	  (lambda ()
-	    (rcirc-track-minor-mode 1)))
-
-; sort buffer list by mode
+;; sort buffer list by mode
 (setq Buffer-menu-sort-column 4)
 
-; django mode
-(require 'python-django)
+;; spaces indent
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+(setq-default tab-width 2)
+(setq indent-line-function 'insert-tab)
+
+;; javascript indent
+(setq js2-basic-offset 2)
+(setq js-indent-level 2)
+
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; see ya
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; display time
+(display-time-mode 't)
+
+;; color theme
+;; (require 'color-theme)
+
+;; post melpa init
+(add-hook 'after-init-hook (lambda () (load "~/.emacs.init.el")))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("91b5a381aa9b691429597c97ac56a300db02ca6c7285f24f6fe4ec1aa44a98c3" "9bcb8ee9ea34ec21272bb6a2044016902ad18646bd09fdd65abae1264d258d89" "c7359bd375132044fe993562dfa736ae79efc620f68bab36bd686430c980df1c" "e26780280b5248eb9b2d02a237d9941956fc94972443b0f7aeec12b5c15db9f3" "dc46381844ec8fcf9607a319aa6b442244d8c7a734a2625dac6a1f63e34bc4a6" "0ebe0307942b6e159ab794f90a074935a18c3c688b526a2035d14db1214cf69c" "90b5269aefee2c5f4029a6a039fb53803725af6f5c96036dee5dc029ff4dff60" "a774c5551bc56d7a9c362dca4d73a374582caedb110c201a09b410c0ebbb5e70" "33c5a452a4095f7e4f6746b66f322ef6da0e770b76c0ed98a438e76c497040bb" "7f14fad67d7ac8d0555bd5a1fd1a429ce2dd37162c4e2dc7ae501f54bad1273a" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
- '(nxhtml-autoload-web nil t))
-
-(setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
-(setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
-
-;; coffee-mode
-(add-to-list 'load-path "~/.emacs.d/coffee-mode")
-(require 'coffee-mode)
-(setq coffee-tab-width 2)
-
-;; 4-spaces indent
-(setq-default indent-tabs-mode nil)
-(setq tab-width 2)
-(setq-default tab-width 2)
-(setq indent-line-function 'insert-tab)
-
-;; SCSS mode
-(autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-(setq scss-compile-at-save nil)
-
-;; ruby tweaks
-(setq ruby-insert-encoding-magic-comment nil)
+ '(custom-safe-themes
+   (quote
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "26614652a4b3515b4bbbb9828d71e206cc249b67c9142c06239ed3418eff95e2" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" default)))
+ '(sml/mode-width
+   (if
+       (eq powerline-default-separator
+           (quote arrow))
+       (quote right)
+     (quote full)))
+ '(sml/pos-id-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s" powerline-default-separator
+                            (car powerline-default-separator-dir)))
+                   (quote powerline-active1)
+                   (quote powerline-active2))))
+     (:propertize " " face powerline-active2))))
+ '(sml/pos-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s" powerline-default-separator
+                            (cdr powerline-default-separator-dir)))
+                   (quote powerline-active1)
+                   nil)))
+     (:propertize " " face sml/global))))
+ '(sml/pre-id-separator
+   (quote
+    (""
+     (:propertize " " face sml/global)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s" powerline-default-separator
+                            (car powerline-default-separator-dir)))
+                   nil
+                   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-minor-modes-separator
+   (quote
+    (""
+     (:propertize " " face powerline-active2)
+     (:eval
+      (propertize " "
+                  (quote display)
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s" powerline-default-separator
+                            (cdr powerline-default-separator-dir)))
+                   (quote powerline-active2)
+                   (quote powerline-active1))))
+     (:propertize " " face powerline-active1))))
+ '(sml/pre-modes-separator (propertize " " (quote face) (quote sml/modes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; package manager
-(require 'package)
-(add-to-list 'package-archives
-'("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-;; latex
-(getenv "PATH")
- (setenv "PATH"
-(concat
- "/usr/texbin" ":"
-
-(getenv "PATH")))
