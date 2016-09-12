@@ -24,27 +24,5 @@
 ;; sort buffer list by mode
 (setq Buffer-menu-sort-column 4)
 
-;; spaces indent
-(setq-default indent-tabs-mode nil)
-(setq tab-width 2)
-(setq-default tab-width 2)
-(setq indent-line-function 'insert-tab)
-
-;; javascript indent
-(setq js2-basic-offset 2)
-(setq js-indent-level 2)
-
-;; magit
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;; see ya
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; display time
-(display-time-mode 't)
-
-;; color theme
-;; (require 'color-theme)
-
 ;; post melpa init
 (add-hook 'after-init-hook (lambda () (load "~/emacs.d/.emacs.init.el")))
