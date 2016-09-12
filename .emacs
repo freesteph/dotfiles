@@ -25,4 +25,4 @@
 (setq Buffer-menu-sort-column 4)
 
 ;; post melpa init
-(add-hook 'after-init-hook (lambda () (load "~/emacs.d/.emacs.init.el")))
+(add-hook 'after-init-hook (lambda () (load "~/emacs.d/init.el")))
