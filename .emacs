@@ -17,12 +17,19 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; mac keys
-(setq mac-command-modifier 'meta
-      mac-option-modifier 'super)
-
 ;; sort buffer list by mode
 (setq Buffer-menu-sort-column 4)
 
 ;; post melpa init
-(add-hook 'after-init-hook (lambda () (load "~/emacs.d/init.el")))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (mu4e magit ace-window flycheck :flycheck org-bullets org-mode deft counsel counseil swiper ivy use-package))))
+
+(setq use-package-always-ensure t)
+
+(add-hook 'after-init-hook (lambda () (load "~/.emacs.d/init.el")))
