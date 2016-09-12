@@ -47,4 +47,4 @@
 ;; (require 'color-theme)
 
 ;; post melpa init
-(add-hook 'after-init-hook (lambda () (load "~/.emacs.init.el")))
+(add-hook 'after-init-hook (lambda () (load "~/emacs.d/.emacs.init.el")))
