@@ -106,3 +106,6 @@
 (display-time-mode 't)
 
 (add-hook 'after-init-hook (lambda () (load "~/.emacs.private.el")))
+
+;; org-mode
+(org-bullets-mode 1)
