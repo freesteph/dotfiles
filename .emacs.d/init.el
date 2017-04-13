@@ -53,15 +53,9 @@
  js2-mode-show-parse-errors nil
  js2-mode-show-strict-warnings nil)
 
-;; https://github.com/purcell/exec-path-from-shell
-;; only need exec-path-from-shell on OSX
-;; this hopefully sets up path and other vars better
-;; (when (memq window-system '(mac ns))
-;;   (exec-path-from-shell-initialize))
-
 ;; flycheck
-(require 'flycheck)
-(add-hook 'js2-mode-hook 'flycheck-mode)
+(use-package flycheck
+  :ensure t)
 
 ;; ace-window
 (require 'ace-window)
@@ -70,13 +64,14 @@
 
 ;; ag
 (setq ag-group-matches nil)
+(setq ag-reuse-buffers t)
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; magit-pulls
-;; (require 'magit-gh-pulls)
-;; (add-hook 'magit-mode-hook 'turn-pacpon-magit-gh-pulls)
+(require 'magit-gh-pulls)
+(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
 ;; mu4e
 (require 'mu4e)
@@ -85,20 +80,10 @@
  mu4e-update-interval 300
  mu4e-get-mail-command "getmail")
 
-;; smtp conf
-(setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-smtp-user "stephane@musicglue.com"
-      smtpmail-smtp-server "smtp.1and1.com")
-
 ;; rcirc
 (require 'tls)
 (require 'rcirc)
 (setq rcirc-default-nick "freesteph")
-
-;; deft
-(setq
- deft-default-extension "org"
- deft-auto-save-interval 0.0)
 
 ;; see ya
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -110,3 +95,35 @@
 
 ;; org-mode
 (org-bullets-mode 1)
+
+(use-package counsel
+  :bind
+  (("M-y" . counsel-yank-pop)
+   :map ivy-minibuffer-map
+   ("M-y" . ivy-next-line)))
+
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; a  list of user's e-mail addresses
+(setq mu4e-user-mail-address-list '("stephane@musicglue.com")) ; FIXME
+(setq mu4e-confirm-quit nil)
+
+;; terminal outputs
+;; truncate buffers continuously
+(add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
+
+(use-package mu4e-alert
+  :bind ("C-=" . mu4e-alert-view-unread-mails))
+
+;; web mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.liquid\\'" . web-mode))
+(setq web-mode-markup-indent-offset 2)
+
+
+;; emojify mode
+(add-hook 'after-init-hook 'global-emojify-mode)
+
+;; devdocs
+(global-set-key (kbd "C-M-'") 'devdocs-search)
