@@ -35,6 +35,14 @@
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
 
+;; projectile
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :config
+  (projectile-global-mode)
+  (setq projectile-completion-system 'ivy))
+
 ;; mac keys
 (setq mac-command-modifier 'meta
       mac-option-modifier 'super)
@@ -46,12 +54,19 @@
 (setq indent-line-function 'insert-tab)
 
 ;; js2-mode
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(setq
- js2-basic-offset '2
- js-indent-level '2
- js2-mode-show-parse-errors nil
- js2-mode-show-strict-warnings nil)
+(use-package js2-mode
+  :ensure t
+  ;; :mode (("\\.js$" . js2-mode)
+  ;;        ("\\.jsx$" . js2-jsx-mode))
+  :commands (js2-mode
+             js2-jsx-mode)
+  :init
+  (setq-default js2-bounce-indent-p t)
+  (setq-default js-indent-level 2)
+  (setq-default js2-basic-offset js-indent-level
+                js2-mode-show-parse-errors nil
+                js2-mode-show-strict-warnings nil
+                js2-strict-trailing-comma-warning nil))
 
 ;; flycheck
 (use-package flycheck
@@ -63,8 +78,13 @@
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 
 ;; ag
-(setq ag-group-matches nil)
-(setq ag-reuse-buffers t)
+(use-package ag
+  :ensure t
+  :config
+  (setq ag-highlight-search t)
+  (setq ag-reuse-buffers t)
+  (setq ag-reuse-window t)
+  (setq ag-group-matches nil))
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
