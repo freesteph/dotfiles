@@ -10,10 +10,10 @@
 
 ; default font
 (set-face-attribute 'default nil
-                    :family "Source Code Pro"
+                    :family "Iosevka"
                     :weight 'light
                     :width 'normal
-                    :height 160)
+                    :height 170)
 
 ;; swiper
 (ivy-mode 1)
