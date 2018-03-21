@@ -16,7 +16,7 @@
                     :family "Iosevka"
                     :weight 'light
                     :width 'normal
-                    :height 170)
+                    :height 150)
 
 (use-package nord-theme
   :ensure t
@@ -39,6 +39,10 @@
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy))
+
+(use-package counsel-projectile
+  :ensure t
+  :config (counsel-projectile-mode))
 
 (use-package expand-region
   :ensure t
@@ -112,7 +116,7 @@
 
 ;; devdocs
 (use-package devdocs
-  :bind "C-M-'" . devdocs-search)
+  :bind ("C-M-'" . devdocs-search))
 
 ;; dictionary
 (use-package dictionary
@@ -137,3 +141,9 @@
 (use-package magithub
   :after magit
   :config (magithub-feature-autoinject t))
+(use-package yasnippet
+  :ensure t
+  :config (yas-global-mode))
+(use-package minions
+  :ensure t
+  :config (minions-mode))
