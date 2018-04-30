@@ -11,16 +11,20 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; js
+(setq js-indent-level 2)
+
+;; mac keys
+(setq mac-command-modifier 'meta
+      mac-option-modifier 'super)
+
+
 ; default font
 (set-face-attribute 'default nil
                     :family "Iosevka"
                     :weight 'light
                     :width 'normal
-                    :height 150)
-
-(use-package nord-theme
-  :ensure t
-  :config (load-theme 'nord))
+                    :height 130)
 
 (use-package swiper
   :ensure t
@@ -31,6 +35,7 @@
 
 (use-package company
   :ensure t
+  :config (global-company-mode)
   :diminish company-mode)
 
 (use-package projectile
@@ -46,17 +51,7 @@
 
 (use-package expand-region
   :ensure t
-  :bind ("C-=" . er/expand-region))
-
-;; mac keys
-(setq mac-command-modifier 'meta
-      mac-option-modifier 'super)
-
-;; spaces indent (not sure if still relevant)
-(setq-default indent-tabs-mode nil)
-(setq tab-width 2)
-(setq-default tab-width 2)
-(setq indent-line-function 'insert-tab)
+  :bind ("M-=" . er/expand-region))
 
 ;; mac path something flycheck
 (use-package exec-path-from-shell
@@ -74,7 +69,7 @@
     '(javascript-jshint)))
 
 ;; ace-window
-(use-package ace-window
+ (use-package ace-window
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
@@ -101,8 +96,6 @@
 
 ;; display time
 (display-time-mode 't)
-
-(add-hook 'after-init-hook (lambda () (load "~/.emacs.d/private.el")))
 
 (use-package counsel
   :bind
@@ -138,12 +131,49 @@
   :init
   (add-hook 'js-mode-hook 'add-node-modules-path t))
 
-(use-package magithub
-  :after magit
-  :config (magithub-feature-autoinject t))
+;; (use-package magithub
+;;   :after magit
+;;   :config (magithub-feature-autoinject t))
+
+
+(setq dired-listing-switches "-o")
+
 (use-package yasnippet
   :ensure t
   :config (yas-global-mode))
-(use-package minions
+
+(use-package deft
+  :config
+  (setq deft-directory "/Users/stephane.maniaci/build/ASOS")
+  (setq deft-auto-save-interval 0.0))
+
+;; (use-package minions
+;;   :ensure t
+;;   :config (minions-mode))
+
+(use-package dumb-jump
   :ensure t
-  :config (minions-mode))
+  :config (setq dumb-jump-selector 'ivy))
+
+(use-package beacon
+  :init (beacon-mode))
+
+(use-package solarized-theme
+  :config
+  (load-theme 'solarized-light t)
+  (let ((line (face-attribute 'mode-line :underline)))
+    (set-face-attribute 'mode-line          nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :overline   line)
+    (set-face-attribute 'mode-line-inactive nil :underline  line)
+    (set-face-attribute 'mode-line          nil :box        nil)
+    (set-face-attribute 'mode-line-inactive nil :box        nil)
+    (set-face-attribute 'mode-line-inactive nil :background "#f9f2d9")))
+
+(use-package moody
+  :config
+  (setq x-underline-at-descent-line t)
+  (setq moody-slant-function #'moody-slant-apple-rgb)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
+
+(load "~/.emacs.d/private.el")
