@@ -1,0 +1,11 @@
+* Dotfiles
+
+These dotfiles are best-managed with [[https://www.gnu.org/software/stow][GNU Stow]]. I restore/update them
+using this pattern:
+
+#+BEGIN_SRC sh
+stow -v -t $HOME -D package -S package
+#+END_SRC
+
+This effectively removes any previous symlinks I might have in =$HOME=, then
+installs the newest package folder into it.
