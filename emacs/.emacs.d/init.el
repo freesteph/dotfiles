@@ -175,4 +175,7 @@
 (use-package which-key
   :ensure t)
 
+(use-package ripgrep
+  :ensure t)
+
 (load "~/.emacs.d/private.el")
