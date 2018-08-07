@@ -24,18 +24,20 @@
                     :family "Iosevka"
                     :weight 'light
                     :width 'normal
-                    :height 130)
+		    :height 130)
 
 (use-package swiper
   :ensure t
   :config (ivy-mode 1)
   :bind (("C-s" . swiper)
          ("M-x" . counsel-M-x)
+	 ("M-/" . counsel-company)
          ("C-x C-f" . counsel-find-file)))
 
 (use-package company
   :ensure t
-  :config (global-company-mode)
+  :config (setq company-dabbrev-downcase nil)
+  :init (global-company-mode)
   :diminish company-mode)
 
 (use-package projectile
@@ -55,14 +57,15 @@
 
 ;; mac path something flycheck
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
   :ensure t
   :config
   (exec-path-from-shell-initialize))
 
 ;; flycheck
 (use-package flycheck
-  :ensure t)
+  :ensure t
+  :config
+  (setq flycheck-enabled-checkers 'eslint))
 
 (setq-default flycheck-disabled-checkers
   (append flycheck-disabled-checkers
@@ -128,6 +131,7 @@
 
 ; node modules path = happy flycheck
 (use-package add-node-modules-path
+  :ensure t
   :init
   (add-hook 'js-mode-hook 'add-node-modules-path t))
 
@@ -147,9 +151,9 @@
   (setq deft-directory "/Users/stephane.maniaci/build/ASOS")
   (setq deft-auto-save-interval 0.0))
 
-;; (use-package minions
-;;   :ensure t
-;;   :config (minions-mode))
+(use-package minions
+  :ensure t
+  :config (minions-mode))
 
 (use-package dumb-jump
   :ensure t
@@ -177,3 +181,6 @@
   (moody-replace-vc-mode))
 
 (load "~/.emacs.d/private.el")
+
+(use-package which-key
+  :ensure t)
