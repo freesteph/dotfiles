@@ -18,7 +18,6 @@
 (setq mac-command-modifier 'meta
       mac-option-modifier 'super)
 
-
 ; default font
 (set-face-attribute 'default nil
                     :family "Iosevka"
@@ -90,10 +89,6 @@
 (use-package magit
  :bind ("C-x g" . magit-status))
 
-;; magit-pulls
-;; (require 'magit-gh-pulls)
-;; (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
-
 ;; see ya
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -127,6 +122,7 @@
   :init
   (add-hook 'js-mode-hook 'prettier-js-mode))
 
+;; css
 (setq css-indent-offset 2)
 
 ; node modules path = happy flycheck
@@ -135,12 +131,8 @@
   :init
   (add-hook 'js-mode-hook 'add-node-modules-path t))
 
-;; (use-package magithub
-;;   :after magit
-;;   :config (magithub-feature-autoinject t))
-
-
-(setq dired-listing-switches "-o")
+;; human after all
+(setq dired-listing-switches "-h")
 
 (use-package yasnippet
   :ensure t
@@ -180,7 +172,7 @@
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode))
 
-(load "~/.emacs.d/private.el")
-
 (use-package which-key
   :ensure t)
+
+(load "~/.emacs.d/private.el")
