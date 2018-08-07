@@ -1,0 +1,1 @@
+stow -v -t $HOME -D package -S package
