@@ -1,9 +1,6 @@
 # load Z to jump around
 . /usr/local/etc/profile.d/z.sh
 
-alias ls='ls -G'
-alias ll='ls -alH'
-
 # avoid colors in Emacs
 if [ -n "$INSIDE_EMACS" ]; then
    echo "inside Emacs"
