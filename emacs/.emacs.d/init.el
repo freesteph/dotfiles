@@ -178,4 +178,4 @@
 (use-package ripgrep
   :ensure t)
 
-(load "~/.emacs.d/private.el")
+;; (load "~/.emacs.d/private.el")
