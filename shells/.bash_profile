@@ -5,8 +5,7 @@ eval "$(jump shell)"
 export PS1="\A \w :: "
 
 # enhanced commands
-alias ls='ls -G'
-alias ll='ls -ao'
+alias ls='ls -Gao'
 
 # node version manager
 export NVM_DIR="$HOME/.nvm"
