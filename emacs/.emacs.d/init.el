@@ -82,10 +82,10 @@
 (use-package ag
   :ensure t
   :config
-  (setq ag-highlight-search t)
-  (setq ag-reuse-buffers t)
-  (setq ag-reuse-window t)
-  (setq ag-group-matches nil))
+  (setq ag-highlight-search t
+	ag-reuse-buffers t
+	ag-reuse-window t
+	ag-group-matches nil))
 
 ;; magit
 (use-package magit
@@ -142,8 +142,9 @@
 
 (use-package deft
   :config
-  (setq deft-directory "/Users/stephane.maniaci/build/ASOS")
-  (setq deft-auto-save-interval 0.0))
+  (setq
+   deft-directory "/Users/stephane.maniaci/build/ASOS"
+   deft-auto-save-interval 0.0))
 
 (use-package minions
   :ensure t
@@ -176,7 +177,11 @@
 
 (use-package which-key
   :ensure t
-  :config (which-key-mode 1))
+  :config
+  (which-key-mode 1)
+  (setq which-key-popup-type 'side-window
+	which-key-side-window-location 'left))
+
 
 (use-package ripgrep
   :ensure t)
