@@ -4,3 +4,4 @@ brew "git"
 brew "rbenv"
 brew "ruby-build"
 brew "mu", args: ["with-emacs", "HEAD"]
+cask "spectacle"
