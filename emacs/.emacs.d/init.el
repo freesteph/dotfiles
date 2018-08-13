@@ -44,7 +44,9 @@
   :diminish projectile-mode
   :config
   (projectile-mode)
-  (setq projectile-completion-system 'ivy))
+  (setq projectile-completion-system 'ivy)
+  :bind ("C-c C-p" . 'projectile-command-map))
+
 
 (use-package counsel-projectile
   :ensure t
@@ -173,7 +175,8 @@
   (moody-replace-vc-mode))
 
 (use-package which-key
-  :ensure t)
+  :ensure t
+  :config (which-key-mode 1))
 
 (use-package ripgrep
   :ensure t)
