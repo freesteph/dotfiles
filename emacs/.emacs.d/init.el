@@ -179,3 +179,8 @@
   :ensure t)
 
 ;; (load "~/.emacs.d/private.el")
+
+(global-set-key (kbd "C-x RET") 'toggle-frame-fullscreen)
+
+;; use ls coloured, long listing, all files, vertical, omitting group
+(setq dired-listing-switches "-Gla1o")
