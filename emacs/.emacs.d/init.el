@@ -183,10 +183,6 @@
   (setq which-key-popup-type 'side-window
 	which-key-side-window-location 'left))
 
-
-(use-package ripgrep
-  :ensure t)
-
 ;; (load "~/.emacs.d/private.el")
 
 (global-set-key (kbd "C-x RET") 'toggle-frame-fullscreen)
