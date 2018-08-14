@@ -182,3 +182,5 @@
 (setq dired-listing-switches "-Gla1o")
 
 (use-package rainbow-mode)
+
+(use-package json-mode)
