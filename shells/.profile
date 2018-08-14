@@ -2,7 +2,7 @@
 eval "$(jump shell)"
 
 # prompt
-export PS1="\A \w ➢  "
+export PS1="\A \w \[\e[35m\]➢\[\e[m\]  "
 
 # enhanced commands
 alias ls='ls -Gao'
