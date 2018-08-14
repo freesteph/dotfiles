@@ -79,15 +79,6 @@
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
-;; ag
-(use-package ag
-  :ensure t
-  :config
-  (setq ag-highlight-search t
-	ag-reuse-buffers t
-	ag-reuse-window t
-	ag-group-matches nil))
-
 ;; magit
 (use-package magit
  :bind ("C-x g" . magit-status))
