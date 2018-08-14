@@ -193,3 +193,5 @@
 
 ;; use ls coloured, long listing, all files, vertical, omitting group
 (setq dired-listing-switches "-Gla1o")
+
+(use-package rainbow-mode)
