@@ -11,3 +11,6 @@ alias ls='ls -Gao --color=auto'
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"'
