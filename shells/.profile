@@ -5,7 +5,7 @@ eval "$(jump shell)"
 export PS1="\A \w \[\e[35m\]➢\[\e[m\]  "
 
 # enhanced commands
-alias ls='ls -Gao'
+alias ls='ls -Gao --color=auto'
 
 # node version manager
 export NVM_DIR="$HOME/.nvm"
