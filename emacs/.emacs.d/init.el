@@ -144,7 +144,10 @@
 
 (use-package dumb-jump
   :ensure t
-  :config (setq dumb-jump-selector 'ivy))
+  :init (dumb-jump-mode)
+  :config
+  (setq dumb-jump-selector 'ivy
+	dumb-jump-prefer-searcher 'rg))
 
 (use-package beacon
   :config
