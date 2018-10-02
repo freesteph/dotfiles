@@ -147,6 +147,8 @@
   :config (setq dumb-jump-selector 'ivy))
 
 (use-package beacon
+  :config
+  (setq beacon-dont-blink-major-modes '(shell-mode))
   :init (beacon-mode))
 
 (use-package which-key
