@@ -160,13 +160,6 @@
     (set-face-attribute 'mode-line-inactive nil :box        nil)
     (set-face-attribute 'mode-line-inactive nil :background "#f9f2d9")))
 
-(use-package moody
-  :config
-  (setq x-underline-at-descent-line t)
-  (setq moody-slant-function #'moody-slant-apple-rgb)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
-
 (use-package which-key
   :ensure t
   :config
