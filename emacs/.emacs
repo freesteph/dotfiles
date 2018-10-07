@@ -22,3 +22,7 @@
 (setq use-package-always-ensure t)
 
 (add-hook 'after-init-hook (lambda () (load "~/.emacs.d/init.el")))
+
+;; move custom declarations out of here
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file :noerror)
