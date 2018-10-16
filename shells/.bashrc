@@ -14,3 +14,4 @@ alias ls='ls -Gao --color=auto'
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
