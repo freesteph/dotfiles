@@ -45,8 +45,7 @@
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy)
-  :bind ("C-c C-p" . 'projectile-command-map))
-
+  :bind ("s-p" . 'projectile-command-map))
 
 (use-package counsel-projectile
   :ensure t
@@ -135,7 +134,8 @@
 (use-package deft
   :config
   (setq
-   deft-directory "/Users/stephane.maniaci/build/ASOS"
+   deft-directory "/Users/stephane.maniaci/build/notes"
+   deft-default-extension "org"
    deft-auto-save-interval 0.0))
 
 (use-package minions
@@ -161,13 +161,20 @@
   (setq which-key-popup-type 'side-window
 	which-key-side-window-location 'left))
 
-;; (load "~/.emacs.d/private.el")
-
 (global-set-key (kbd "C-x RET") 'toggle-frame-fullscreen)
 
 ;; use ls coloured, long listing, all files, vertical, omitting group
 (setq dired-listing-switches "-Gla1o")
 
+;; paint colour hexs #224488
 (use-package rainbow-mode)
 
 (use-package json-mode)
+
+(use-package haskell-mode)
+
+;; e-mail things
+(load "~/.emacs.d/private.el")
+
+;; changes quite often so separate untracked file
+(load "~/.emacs.d/current-theme.el")
