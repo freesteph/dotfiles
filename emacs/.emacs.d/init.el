@@ -174,7 +174,9 @@
 (use-package haskell-mode)
 
 ;; e-mail things
-(load "~/.emacs.d/private.el")
+(let ((private-config "~/.emacs.d/private.el"))
+  (and (file-exists-p private-config)
+       (load "~/.emacs.d/private.el")))
 
 ;; changes quite often so separate untracked file
 (defun freesteph/load-theme-from-env ()
