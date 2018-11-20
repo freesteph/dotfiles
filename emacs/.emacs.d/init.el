@@ -177,4 +177,11 @@
 (load "~/.emacs.d/private.el")
 
 ;; changes quite often so separate untracked file
-(load "~/.emacs.d/current-theme.el")
+(defun freesteph/load-theme-from-env ()
+  "Load a colour theme from environment variable EMACS_THEME."
+  (let ((theme (getenv "EMACS_THEME")))
+    (and (not (null theme))
+	 (seq-contains (custom-available-themes) (intern theme))
+	 (load-theme (intern theme) t))))
+
+(freesteph/load-theme-from-env)
