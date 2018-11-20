@@ -21,7 +21,7 @@
 ; default font
 (set-face-attribute 'default nil
                     :family "Iosevka Term"
-                    :weight 'normal
+                    :weight 'light
                     :width 'normal
 		    :height 130)
 
