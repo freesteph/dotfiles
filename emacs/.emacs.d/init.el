@@ -21,14 +21,14 @@
 ; default font
 (set-face-attribute 'default nil
                     :family "Iosevka Term"
-                    :weight 'light
+                    :weight 'normal
                     :width 'normal
 		    :height 130)
 
 (use-package swiper
   :ensure t
   :config (ivy-mode 1)
-  :bind (("C-s" . swiper)
+  :bind (("C-s" . counsel-grep-or-swiper)
          ("M-x" . counsel-M-x)
 	 ("M-/" . counsel-company)
          ("C-x C-f" . counsel-find-file)))
