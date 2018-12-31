@@ -20,7 +20,7 @@
 
 ; default font
 (set-face-attribute 'default nil
-                    :family "Iosevka Term"
+                    :family "Overpass Mono"
                     :weight 'normal
                     :width 'normal
 		    :height 130)
