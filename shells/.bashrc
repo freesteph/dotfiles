@@ -5,8 +5,8 @@
 export PS1="\A \w \[\e[35m\]➢\[\e[m\]  "
 
 # enhanced commands
-alias ls='ls -Gao --color=auto'
-
+alias ls='ls -Gao'
+alias e='emacsclient -nw '
 # node version manager
 # export NVM_DIR="$HOME/.nvm"
 # . "/usr/local/opt/nvm/nvm.sh"
