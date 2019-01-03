@@ -134,7 +134,7 @@
 (use-package deft
   :config
   (setq
-   deft-directory "/Users/stephane.maniaci/build/notes"
+   deft-directory (expand-file-name "~/build/notes")
    deft-default-extension "org"
    deft-auto-save-interval 0.0))
 
