@@ -6,6 +6,9 @@
  user-mail-address "stephane.maniaci@asos.com"
  user-full-name  "Stéphane Maniaci")
 
+;; common lisp
+(setq inferior-lisp-program "/usr/bin/clisp")
+
 ;; superfluous chrome
 (menu-bar-mode 0)
 (tool-bar-mode 0)
