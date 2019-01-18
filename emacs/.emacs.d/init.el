@@ -172,6 +172,10 @@
 ;; paint colour hexs #224488
 (use-package rainbow-mode)
 
+;; flash the modeline rather than the other absurd options
+(use-package mode-line-bell
+  :config (mode-line-bell-mode))
+
 (use-package json-mode)
 
 (use-package haskell-mode)
