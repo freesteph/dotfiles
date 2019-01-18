@@ -48,7 +48,7 @@
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy)
-  :bind ("s-p" . 'projectile-command-map))
+  :bind ("C-c C-p" . 'projectile-command-map))
 
 (use-package counsel-projectile
   :ensure t
