@@ -106,8 +106,9 @@
   :bind ("C-M-'" . devdocs-search))
 
 ;; dictionary
-(use-package dictionary
-  :bind ("C-c C-d" . dictionary-search))
+(use-package define-word
+  :bind ("C-c C-d" . define-word-at-point)
+  :custom (define-word-default-service 'webster "use the Wonderful webster dictionary"))
 
 ;; js-import
 (use-package js-import
