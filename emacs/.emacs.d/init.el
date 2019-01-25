@@ -194,4 +194,44 @@
 	 (seq-contains (custom-available-themes) (intern theme))
 	 (load-theme (intern theme) t))))
 
-(freesteph/load-theme-from-env)
+(setq org-publish-project-alist
+      '(("personal"
+	 :base-directory "~/build/me/selfweb/notes/"
+	 :publishing-function org-html-publish-to-html
+         :html-head "<link rel=\"stylesheet\"
+                       href=\"./style.css\" type=\"text/css\"/>"
+	 :with-author nil
+	 :with-toc nil
+	 :html-html5-fancy t
+	 :with-title nil
+	 :html-validation-link nil
+	 :section-numbers nil
+	 :auto-sitemap t
+	 :makeindex t
+	 :publishing-directory "/ssh:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
+
+(defun jw/html-escape-attribute (value)
+  "Entity-escape VALUE and wrap it in quotes."
+  ;; http://www.w3.org/TR/2009/WD-html5-20090212/serializing-html-fragments.html
+  ;;
+  ;; "Escaping a string... consists of replacing any occurrences of
+  ;; the "&" character by the string "&amp;", any occurrences of the
+  ;; U+00A0 NO-BREAK SPACE character by the string "&nbsp;", and, if
+  ;; the algorithm was invoked in the attribute mode, any occurrences
+  ;; of the """ character by the string "&quot;"..."
+  (let* ((value (replace-regexp-in-string "&" "&amp;" value))
+         (value (replace-regexp-in-string "\u00a0" "&nbsp;" value))
+         (value (replace-regexp-in-string "\"" "&quot;" value)))
+    value))
+
+
+(eval-after-load "org"
+  '(org-add-link-type
+    "span" #'ignore ; not an 'openable' link
+    #'(lambda (class desc format)
+        (pcase format
+          (`html (format "<span class=\"%s\">%s</span>"
+                         (jw/html-escape-attribute class)
+                         (or desc "")))
+          (_ (or desc ""))))))
+;; (freesteph/load-theme-from-env)
