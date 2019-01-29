@@ -8,10 +8,9 @@ export PS1="\A \w \[\e[35m\]➢\[\e[m\]  "
 alias ls='ls -Gao'
 alias e='emacsclient -nw '
 # node version manager
-# export NVM_DIR="$HOME/.nvm"
-# . "/usr/local/opt/nvm/nvm.sh"
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/.config/yarn/global:$PATH"
 eval "$(rbenv init -)"
