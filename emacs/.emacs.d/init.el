@@ -183,7 +183,13 @@
 (use-package json-mode
   :config (unbind-key "C-c C-p" json-mode-map))
 
-(use-package haskell-mode)
+;; elfeed
+(use-package elfeed
+  :bind ("C-x w" . elfeed)
+  :config
+  (setq elfeed-feeds
+	'("http://nullprogram.com/feed/"
+          "https://blog.cleancoder.com/atom.xml")))
 
 ;; e-mail things
 (let ((private-config "~/.emacs.d/private.el"))
