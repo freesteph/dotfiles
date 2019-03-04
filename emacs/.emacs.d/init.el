@@ -177,7 +177,8 @@
 (use-package mode-line-bell
   :config (mode-line-bell-mode))
 
-(use-package json-mode)
+(use-package json-mode
+  :config (unbind-key "C-c C-p" json-mode-map))
 
 (use-package haskell-mode)
 
