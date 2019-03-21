@@ -29,7 +29,7 @@
                     :family "Overpass Mono"
                     :weight 'normal
                     :width 'normal
-		    :height 130)
+		    :height 120)
 
 (use-package swiper
   :ensure t
@@ -132,7 +132,7 @@
   (add-hook 'js-mode-hook 'add-node-modules-path t))
 
 ;; human after all
-(setq dired-listing-switches "-h")
+(setq dired-listing-switches "-alh")
 
 (use-package yasnippet
   :ensure t
