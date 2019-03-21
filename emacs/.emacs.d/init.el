@@ -1,13 +1,16 @@
 ;; basic info
-(use-package diminish
-  :ensure t)
-
 (setq
  user-mail-address "stephane.maniaci@asos.com"
  user-full-name  "Stéphane Maniaci")
 
+;; uncrowd modeline
+(use-package diminish
+  :ensure t)
+
 ;; common lisp
-(setq inferior-lisp-program "/usr/bin/clisp")
+(use-package slime
+  :config
+  (setq inferior-lisp-program "/usr/bin/clisp"))
 
 ;; superfluous chrome
 (menu-bar-mode 0)
