@@ -29,7 +29,7 @@
                     :family "Overpass Mono"
                     :weight 'normal
                     :width 'normal
-		    :height 120)
+		    :height 110)
 
 (use-package swiper
   :ensure t
