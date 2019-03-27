@@ -20,6 +20,11 @@
 ;; js
 (setq js-indent-level 2)
 
+;; web mode
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode)))
+
 ;; mac keys
 (setq mac-command-modifier 'meta
       mac-option-modifier 'super)
