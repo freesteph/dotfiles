@@ -218,7 +218,7 @@
 	 :base-directory "~/build/me/selfweb/notes/"
 	 :publishing-function org-html-publish-to-html
          :html-head "<link rel=\"stylesheet\"
-                       href=\"./style.css\" type=\"text/css\"/>"
+                       href=\"/style.css\" type=\"text/css\"/>"
 	 :with-author nil
 	 :with-toc nil
 	 :html-html5-fancy t
@@ -226,7 +226,9 @@
 	 :html-validation-link nil
 	 :section-numbers nil
 	 :auto-sitemap t
+	 :exclude ".*.draft.*"
 	 :makeindex t
+	 :recursive t
 	 :publishing-directory "/ssh:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
 
 (defun jw/html-escape-attribute (value)
