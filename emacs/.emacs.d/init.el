@@ -143,6 +143,10 @@
   :ensure t
   :config (yas-global-mode))
 
+(use-package markdown-mode
+  :config
+  (setq markdown-css-paths '("~/.emacs.d/markdown/style.css")))
+
 (use-package deft
   :config
   (setq
