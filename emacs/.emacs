@@ -21,8 +21,13 @@
 (setq Buffer-menu-sort-column 4)
 (setq use-package-always-ensure t)
 
-(add-hook 'after-init-hook (lambda () (load "~/.emacs.d/init.el")))
+(add-hook 'after-init-hook (lambda ()
+                             (let ((extensions '(init sm-core sm-work)))
+                               (dolist (ext extensions)
+                                 (let ((file (concat user-emacs-directory ext)))
+                                   (and (file-exists-p file) (load file)))))))
 
 ;; move custom declarations out of here
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file :noerror)
+(put 'narrow-to-region 'disabled nil)

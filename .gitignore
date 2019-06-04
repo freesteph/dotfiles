@@ -1,3 +1,4 @@
 # emacs auto
 emacs/.emacs.d/**
+!sm-core.el
 projectile-bookmarks.eld
