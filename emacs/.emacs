@@ -24,7 +24,7 @@
 (add-hook 'after-init-hook (lambda ()
                              (let ((extensions '(init sm-core sm-work)))
                                (dolist (ext extensions)
-                                 (let ((file (concat user-emacs-directory ext)))
+                                 (let ((file (format "%s%s%s" user-emacs-directory ext ".el")))
                                    (and (file-exists-p file) (load file)))))))
 
 ;; move custom declarations out of here

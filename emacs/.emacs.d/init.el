@@ -17,6 +17,9 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; tabs
+(setq indent-tabs-mode nil)
+
 ;; js
 (setq js-indent-level 2)
 
@@ -193,12 +196,20 @@
   :config (unbind-key "C-c C-p" json-mode-map))
 
 ;; elfeed
+(defun sm/electric-pair-prohibit (char)
+  "Disable electric-pair mode when in the minibuffer.  CHAR is required but unused."
+  (minibufferp))
+
+(setq electric-pair-inhibit-predicate #'sm/electric-pair-prohibit)
+
+;; mode
 (use-package elfeed
   :bind ("C-x w" . elfeed)
   :config
   (setq elfeed-feeds
 	'("http://nullprogram.com/feed/"
-          "https://blog.cleancoder.com/atom.xml")))
+          "https://blog.cleancoder.com/atom.xml"
+          "https://www.ft.com/?format=rss&edition=uk")))
 
 ;; e-mail things
 (let ((private-config "~/.emacs.d/private.el"))
