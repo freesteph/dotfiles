@@ -5,6 +5,15 @@
 ;;; awkwardly honest functions I use for my work
 
 ;;; Code:
+
+;; encode a special shortcut to open this blessed config file
+(defun sm/edit-init-el ()
+  "Open init.el."
+  (interactive)
+  (find-file (concat user-emacs-directory "init.el")))
+
+(global-set-key (kbd "C-;") 'sm/edit-init-el)
+
 ;; this is a feature I saw in js2-refactor but I don't use js2-mode
 (defun sm/js/toggle-async ()
   "Turn the function at point into an async function."
