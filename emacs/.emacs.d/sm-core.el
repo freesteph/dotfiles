@@ -49,7 +49,6 @@
       (and (search-backward-regexp fn-reg)
            (progn (beginning-of-line)
                   (and (re-search-forward fn-reg)
-                       (message "match is %s" (match-string 1))
                        (replace-match (concat (match-string 1)
                                               (if (match-string 2) "" ", focus: true ")
                                               (match-string 3)))))))))
