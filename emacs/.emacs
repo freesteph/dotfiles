@@ -22,9 +22,10 @@
 (setq use-package-always-ensure t)
 
 (add-hook 'after-init-hook (lambda ()
-                             (let ((extensions '(init sm-core sm-work)))
+                             (let ((extensions '(sm-core sm-work init)))
                                (dolist (ext extensions)
                                  (let ((file (format "%s%s%s" user-emacs-directory ext ".el")))
+                                   (message "loading %s..." file)
                                    (and (file-exists-p file) (load file)))))))
 
 ;; move custom declarations out of here
