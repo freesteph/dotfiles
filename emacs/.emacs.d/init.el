@@ -139,9 +139,6 @@
   :init
   (add-hook 'js-mode-hook 'add-node-modules-path t))
 
-;; human after all
-(setq dired-listing-switches "-alh")
-
 (use-package yasnippet
   :ensure t
   :config (yas-global-mode))
@@ -182,8 +179,10 @@
 
 (global-set-key (kbd "C-x RET") 'toggle-frame-fullscreen)
 
+;; dired
 ;; use ls coloured, long listing, all files, vertical, omitting group
 (setq dired-listing-switches "-Gla1o")
+(setq dired-auto-revert-buffer t)
 
 ;; paint colour hexs #224488
 (use-package rainbow-mode)
