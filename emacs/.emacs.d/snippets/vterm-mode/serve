@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: serve
+# key: mds
+# --
+bundle exec middleman serve
