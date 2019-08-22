@@ -194,7 +194,8 @@
 (use-package json-mode
   :config (unbind-key "C-c C-p" json-mode-map))
 
-;; elfeed
+;; electric-pair
+(electric-pair-mode 1)
 (defun sm/electric-pair-prohibit (char)
   "Disable electric-pair mode when in the minibuffer.  CHAR is required but unused."
   (minibufferp))
