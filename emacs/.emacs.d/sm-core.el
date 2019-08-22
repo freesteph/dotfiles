@@ -14,6 +14,14 @@
 
 (global-set-key (kbd "C-;") 'sm/edit-init-el)
 
+(defun spm/set-frame-font-size (font-size)
+  "Set the FONT-SIZE of the current frame with the same font face."
+  (interactive "NFont size: ")
+  (let ((current-font (frame-parameter nil 'font)))
+	(and (string-match "\\*-[[:digit:]]+-\\*" current-font)
+	     (set-frame-font
+	      (replace-match (format "*-%d-*" font-size) nil nil current-font)))))
+
 ;; this is a feature I saw in js2-refactor but I don't use js2-mode
 (defun sm/js/toggle-async ()
   "Turn the function at point into an async function."
