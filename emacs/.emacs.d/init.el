@@ -21,7 +21,7 @@
 (setf epa-pinentry-mode 'loopback)
 
 ;; tabs
-(setq indent-tabs-mode nil)
+(set-default 'indent-tabs-mode nil)
 
 ;; js
 (setq js-indent-level 2)
