@@ -17,6 +17,9 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; GPG stuff
+(setf epa-pinentry-mode 'loopback)
+
 ;; tabs
 (setq indent-tabs-mode nil)
 
