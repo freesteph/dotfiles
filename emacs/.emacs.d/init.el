@@ -63,7 +63,10 @@
 
 (use-package counsel-projectile
   :ensure t
-  :config (counsel-projectile-mode))
+  :config
+  (counsel-projectile-mode)
+  (setq
+   counsel-rg-base-command (concat counsel-rg-base-command " -M 120")))
 
 (use-package expand-region
   :ensure t
