@@ -181,8 +181,9 @@
 
 ;; dired
 ;; use ls coloured, long listing, all files, vertical, omitting group
-(setq dired-listing-switches "-Gla1o")
+(setq dired-listing-switches "-Ghla1o")
 (setq dired-auto-revert-buffer t)
+(setq dired-dwim-target t)
 
 ;; paint colour hexs #224488
 (use-package rainbow-mode)
