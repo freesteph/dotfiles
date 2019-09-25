@@ -102,7 +102,7 @@
 (use-package magit
  :bind ("C-x g" . magit-status))
 
-;; see ya
+;; remove whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; display time
