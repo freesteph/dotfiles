@@ -283,3 +283,16 @@
                          (or desc "")))
           (_ (or desc ""))))))
 ;; (freesteph/load-theme-from-env)
+
+;; docker
+(use-package dockerfile-mode
+  :no-require t)
+
+;; vterm kills
+(add-to-list 'load-path (format "%s/steph/emacs-libvterm" (getenv "DEV_ROOT")))
+(require 'vterm)
+
+;; unfill
+(use-package unfill)
+
+(add-to-list 'load-path (concat (getenv "DEV_PREFIX") "/share/emacs/site-lisp/mu4e/"))
