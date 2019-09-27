@@ -1,5 +1,4 @@
 brew "stow"
-brew "emacs", args: ["with-cocoa"]
 brew "git"
 brew "nvm"
 brew "yarn", args: ["without-node"]
@@ -9,6 +8,6 @@ brew "mu", args: ["with-emacs", "HEAD"]
 cask "spectacle"
 tap "caskroom/fonts"
 cask "font-iosevka"
-brew "jump"
+brew "autojump"
 brew "ripgrep"
 brew "ghostscript"
