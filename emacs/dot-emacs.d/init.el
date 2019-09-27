@@ -1,6 +1,7 @@
+
 ;; basic info
 (setq
- user-mail-address "stephane.maniaci@asos.com"
+ user-mail-address "stephane.maniaci@digital.cabinet-office.gov.uk"
  user-full-name  "Stéphane Maniaci")
 
 ;; uncrowd modeline
@@ -18,7 +19,7 @@
 (scroll-bar-mode 0)
 
 ;; GPG stuff
-(setf epa-pinentry-mode 'loopback)
+(setf epg-pinentry-mode 'loopback)
 
 ;; tabs
 (set-default 'indent-tabs-mode nil)
@@ -289,8 +290,8 @@
   :no-require t)
 
 ;; vterm kills
-(add-to-list 'load-path (format "%s/steph/emacs-libvterm" (getenv "DEV_ROOT")))
-(require 'vterm)
+;;(add-to-list 'load-path (format "%s/steph/emacs-libvterm" (getenv "DEV_ROOT")))
+;;(require 'vterm)
 
 ;; unfill
 (use-package unfill)

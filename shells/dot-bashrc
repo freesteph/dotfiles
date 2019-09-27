@@ -4,13 +4,14 @@ export EDITOR="emacsclient -c"
 # where things live
 export DEV_ROOT="$HOME/build"
 export DEV_PREFIX="$DEV_ROOT/os"
+export PATH="$DEV_PREFIX/bin:$PATH"
 
 # PGP
 GPG_TTY=$(tty)
 export GPG_TTY
 
 # jump folders
-J=$HOME/.autojump/etc/profile.d/autojump.sh
+J=/usr/local/etc/profile.d/autojump.sh
 if [ -f $J ]; then
     . $J
 fi
@@ -31,10 +32,14 @@ export NVM_DIR="$HOME/.nvm"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [[ -e 'rbenv' ]]; then
+  eval "$(rbenv init -)"
+fi
 
 # global packages
-export PATH="$(yarn global bin):$PATH"
+if [[ -e 'yarn' ]]; then
+  export PATH="$(yarn global bin):$PATH"
+fi
 
 # share history between tabs
 export HISTSIZE=100000                   # big big history
@@ -46,5 +51,5 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 . $(brew --prefix)/etc/bash_completion
 fi
 
-# path
-export PATH="$DEV_PREFIX/bin:$PATH"
+# bundle parallel gems
+export BUNDLE_JOBS=4
