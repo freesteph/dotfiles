@@ -17,7 +17,7 @@ if [ -f $J ]; then
 fi
 
 # prompt
-export PS1="\A \w \[\e[35m\]➢\[\e[m\]  "
+export PS1="\A \w \[\e[1m\]£\[\e[m\]  "
 
 # enhanced commands
 alias ls='ls -Gao'
