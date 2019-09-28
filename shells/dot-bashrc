@@ -20,7 +20,7 @@ fi
 export PS1="\A \w \[\e[1m\]£\[\e[m\]  "
 
 # enhanced commands
-alias ls='ls -Gao'
+alias ls='ls -ahog --color=auto'
 alias e='emacsclient -nw'
 alias em='emacsclient -c -n'
 alias ke='emacsclient -e "(kill-emacs)"'
