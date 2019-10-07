@@ -51,6 +51,10 @@
 	 ("M-/" . counsel-company)
          ("C-x C-f" . counsel-find-file)))
 
+(use-package ivy-prescient
+  :config (ivy-prescient-mode)
+  :ensure t)
+
 (use-package company
   :ensure t
   :config (setq company-dabbrev-downcase nil)
