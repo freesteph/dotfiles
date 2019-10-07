@@ -191,8 +191,9 @@
 (setq dired-auto-revert-buffer t)
 (setq dired-dwim-target t)
 
-;; paint colour hexs #224488
-(use-package rainbow-mode)
+;; paint colour hexs
+(use-package rainbow-mode
+  :config (rainbow-mode))
 
 ;; flash the modeline rather than the other absurd options
 (use-package mode-line-bell
