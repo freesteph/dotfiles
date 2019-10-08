@@ -1,7 +1,7 @@
 # emacs auto
 emacs/dot-emacs.d/*
-!emacs/dot-emacs/sm-work.el
-!emacs/dot-emacs/snippets.el
+!emacs/dot-emacs.d/sm-work.el
+!emacs/dot-emacs.d/snippets
 emacs/dot-emacs.d/elpa
 !sm-core.el
 projectile-bookmarks.eld
