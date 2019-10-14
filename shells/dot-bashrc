@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 # boom
 export EDITOR="emacsclient -c"
 
@@ -19,8 +21,11 @@ fi
 # prompt
 export PS1="\A \w \[\e[1m\]£\[\e[m\]  "
 
-# enhanced commands
-alias ls='ls -ahog --color=auto'
+# better listings
+[[ -n `command gls` ]] && reals='gls' || reals='ls'
+alias ls="$reals -ahog --color=auto"
+
+# emacs client machinery
 alias e='emacsclient -nw'
 alias em='emacsclient -c -n'
 alias ke='emacsclient -e "(kill-emacs)"'
