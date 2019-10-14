@@ -37,12 +37,12 @@ export NVM_DIR="$HOME/.nvm"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
-if [[ `which rbenv` ]]; then
+if [[ -n `command -v rbenv` ]]; then
   eval "$(rbenv init -)"
 fi
 
 # global packages
-if [[ `which yarn` ]]; then
+if [[ -n `command -v yarn` ]]; then
   export PATH="$(yarn global bin):$PATH"
 fi
 
