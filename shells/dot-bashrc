@@ -22,7 +22,7 @@ fi
 export PS1="\A \w \[\e[1m\]£\[\e[m\]  "
 
 # better listings
-[[ -n `command gls` ]] && reals='gls' || reals='ls'
+[[ -n `command -v gls` ]] && reals='gls' || reals='ls'
 alias ls="$reals -ahog --color=auto"
 
 # emacs client machinery
@@ -51,9 +51,11 @@ export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend
 
-# # command completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
+# brew commands completion
+if [[ -n `command -v brew` ]]; then
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
 fi
 
 # bundle parallel gems
