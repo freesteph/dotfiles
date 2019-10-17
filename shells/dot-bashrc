@@ -13,7 +13,7 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 # jump folders
-J=/usr/local/etc/profile.d/autojump.sh
+J=/home/steph/.autojump/etc/profile.d/autojump.sh
 if [ -f $J ]; then
     . $J
 fi
