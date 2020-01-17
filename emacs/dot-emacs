@@ -17,8 +17,10 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; have Emacs handle the decryption prompt
 (pinentry-start)
 
+;; custom files
 (defun spm/load-custom-files ()
   "Load a list of maybe-encrypted files I maintain."
   (let ((extensions '(spm-core spm-work init)))
@@ -32,6 +34,14 @@
 
 (add-hook 'after-init-hook 'spm/load-custom-files)
 
+;; bookmarks
+(require 'bookmark)
+
+(defun spm/load-bookmarks ()
+  "Load my encrypted bookmarks."
+  (bookmark-load (concat bookmark-default-file ".gpg")))
+
+(add-hook 'after-init-hook 'spm/load-bookmarks)
 
 ;; move custom declarations out of here
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
