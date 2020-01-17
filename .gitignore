@@ -3,5 +3,5 @@ emacs/dot-emacs.d/*
 !emacs/dot-emacs.d/sm-work.el
 !emacs/dot-emacs.d/snippets
 emacs/dot-emacs.d/elpa
-!sm-core.el
+!spm-*
 projectile-bookmarks.eld

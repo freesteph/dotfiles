@@ -22,7 +22,7 @@
 (setq use-package-always-ensure t)
 
 (add-hook 'after-init-hook (lambda ()
-                             (let ((extensions '(sm-core sm-work init)))
+                             (let ((extensions '(spm-core spm-work init)))
                                (dolist (ext extensions)
                                  (let ((file (format "%s%s%s" user-emacs-directory ext ".el")))
                                    (message "loading %s..." file)
