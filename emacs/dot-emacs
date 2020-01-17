@@ -17,18 +17,22 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; sort buffer list by mode
-(setq Buffer-menu-sort-column 4)
-(setq use-package-always-ensure t)
+(pinentry-start)
 
-(add-hook 'after-init-hook (lambda ()
-                             (let ((extensions '(spm-core spm-work init)))
-                               (dolist (ext extensions)
-                                 (let ((file (format "%s%s%s" user-emacs-directory ext ".el")))
-                                   (message "loading %s..." file)
-                                   (and (file-exists-p file) (load file)))))))
+(defun spm/load-custom-files ()
+  "Load a list of maybe-encrypted files I maintain."
+  (let ((extensions '(spm-core spm-work init)))
+    (dolist (ext extensions)
+      (let* ((file (format "%s%s%s" user-emacs-directory ext ".el"))
+             (enc-file (concat file ".gpg")))
+        (message "loading %s..." file)
+        (or (and (file-exists-p file) (load file))
+            (and (file-exists-p enc-file) (load enc-file))
+            (message "could not find load file for %s" ext))))))
+
+(add-hook 'after-init-hook 'spm/load-custom-files)
+
 
 ;; move custom declarations out of here
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file :noerror)
-(put 'narrow-to-region 'disabled nil)
