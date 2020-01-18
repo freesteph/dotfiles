@@ -6,13 +6,23 @@
 
 ;;; Code:
 
-;; encode a special shortcut to open this blessed config file
+(defvar spm/sandbox-folder
+  (file-name-as-directory (concat (getenv "DEV_ROOT") "/steph/sandbox"))
+  "Directory hosting sandbox projects.")
+
 (defun sm/edit-init-el ()
   "Open init.el."
   (interactive)
   (find-file (concat user-emacs-directory "init.el")))
 
+;; encode a special shortcut to open this blessed config file
 (global-set-key (kbd "C-;") 'sm/edit-init-el)
+
+(defun spm/make-shed (project-name)
+  "Start a new project called PROJECT-NAME in my sandbox folder."
+  (interactive "MProject name: ")
+  (dired-other-window spm/sandbox-folder)
+  (magit-init (expand-file-name project-name spm/sandbox-folder)))
 
 (defun spm/set-frame-font-size (font-size)
   "Set the FONT-SIZE of the current frame with the same font face."
