@@ -18,6 +18,16 @@
 ;; encode a special shortcut to open this blessed config file
 (global-set-key (kbd "C-;") 'sm/edit-init-el)
 
+
+;; org notepad
+(defun spm/open-pad ()
+  "Open my Org notepad."
+  (interactive)
+  (bookmark-jump "pad.org"))
+
+(global-set-key (kbd "C-#") 'spm/open-pad)
+
+
 (defun spm/make-shed (project-name)
   "Start a new project called PROJECT-NAME in my sandbox folder."
   (interactive "MProject name: ")
