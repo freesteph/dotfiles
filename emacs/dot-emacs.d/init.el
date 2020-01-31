@@ -304,4 +304,9 @@
 (use-package yaml-mode
   :ensure t)
 
-(add-to-list 'load-path (concat (getenv "DEV_PREFIX") "/share/emacs/site-lisp/mu4e/"))
+;; haml
+(use-package haml-mode
+  :ensure t)
+
+;; restclient
+(use-package restclient)
