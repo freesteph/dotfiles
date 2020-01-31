@@ -1,5 +1,4 @@
-;;; package --- Summary
-;;; a set of JS-editing related functions
+;;; spm/work --- set of editing-related functions
 
 ;;; Commentary:
 ;;; awkwardly honest functions I use for my work
@@ -10,13 +9,13 @@
   (file-name-as-directory (concat (getenv "DEV_ROOT") "/steph/sandbox"))
   "Directory hosting sandbox projects.")
 
-(defun sm/edit-init-el ()
+(defun spm/edit-init-el ()
   "Open init.el."
   (interactive)
   (find-file (concat user-emacs-directory "init.el")))
 
 ;; encode a special shortcut to open this blessed config file
-(global-set-key (kbd "C-;") 'sm/edit-init-el)
+(global-set-key (kbd "C-;") 'spm/edit-init-el)
 
 
 ;; org notepad
@@ -43,7 +42,7 @@
 	      (replace-match (format "*-%d-*" font-size) nil nil current-font)))))
 
 ;; this is a feature I saw in js2-refactor but I don't use js2-mode
-(defun sm/js/toggle-async ()
+(defun spm/js/toggle-async ()
   "Turn the function at point into an async function."
   (interactive)
   (save-excursion
@@ -55,7 +54,7 @@
                                               (match-string 2)
                                               " =>"))))))))
 
-(defun sm/js/toggle-string-template ()
+(defun spm/js/toggle-string-template ()
   "Turn the current string into a template string."
   (interactive)
   (save-excursion
@@ -66,8 +65,8 @@
 
 (add-hook 'js-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c `") 'sm/js/toggle-string-template)
-            (local-set-key (kbd "C-c C-a") 'sm/js/toggle-async)))
+            (local-set-key (kbd "C-c `") 'spm/js/toggle-string-template)
+            (local-set-key (kbd "C-c C-a") 'spm/js/toggle-async)))
 
 (defun spm/ruby/toggle-rspec-focus ()
   "Toggle focused-mode for the Rspec test at point."
