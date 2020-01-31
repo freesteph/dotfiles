@@ -294,8 +294,8 @@
   :no-require t)
 
 ;; vterm kills
-;;(add-to-list 'load-path (format "%s/steph/emacs-libvterm" (getenv "DEV_ROOT")))
-;;(require 'vterm)
+(add-to-list 'load-path (format "%s/steph/emacs-libvterm" (getenv "DEV_ROOT")))
+(require 'vterm)
 
 ;; unfill
 (use-package unfill)
