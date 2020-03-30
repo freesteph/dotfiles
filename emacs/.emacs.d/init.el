@@ -1,6 +1,5 @@
-
 ;; basic info
-(setq
+(setf
  user-mail-address "stephane.maniaci@digital.cabinet-office.gov.uk"
  user-full-name  "Stéphane Maniaci")
 
@@ -27,13 +26,12 @@
 ;; js
 (setq js-indent-level 2)
 
-;; web mode
-(use-package web-mode
-  :init
-  (setq web-mode-markup-indent-offset 2)
-  :config
-  (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode)))
+;; ;; web mode
+;; (use-package web-mode
+;;   :init (setq web-mode-markup-indent-offset 2)
+;;   :config
+;;   (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode)))
 
 
 ;; mac keys
@@ -45,7 +43,7 @@
                     :family "Overpass Mono"
                     :weight 'normal
                     :width 'normal
-		    :height 110)
+		    :height 95)
 
 (use-package swiper
   :ensure t
@@ -76,9 +74,7 @@
 (use-package counsel-projectile
   :ensure t
   :config
-  (counsel-projectile-mode)
-  (setq
-   counsel-rg-base-command (concat counsel-rg-base-command " -M 120")))
+  (counsel-projectile-mode))
 
 (use-package expand-region
   :ensure t
@@ -221,7 +217,8 @@
   (setq elfeed-feeds
 	'("http://nullprogram.com/feed/"
           "https://blog.cleancoder.com/atom.xml"
-          "https://www.ft.com/?format=rss&edition=uk")))
+          "https://www.reddit.com/r/emacs.rss"
+          "https://ploum.net/feed/")))
 
 ;; e-mail things
 (let ((private-config "~/.emacs.d/private.el"))
@@ -236,9 +233,11 @@
 	 (seq-contains (custom-available-themes) (intern theme))
 	 (load-theme (intern theme) t))))
 
+(freesteph/load-theme-from-env)
+
 (setq org-publish-project-alist
       '(("personal"
-	 :base-directory "~/build/me/selfweb/notes/"
+	 :base-directory "~/build/steph/selfweb/notes/"
 	 :publishing-function org-html-publish-to-html
          :html-head "<link rel=\"stylesheet\" href=\"/style.css\" type=\"text/css\"/>\n
 <!-- Global site tag (gtag.js) - Google Analytics -->\n
@@ -258,10 +257,42 @@
 	 :html-validation-link nil
 	 :section-numbers nil
 	 :auto-sitemap t
+         :sitemap-title "Latest blog entries"
+         :sitemap-format-entry spm/org-publish-sitemap-default-entry
+         :sitemap-function spm/org-publish-sitemap-default
+         :sitemap-sort-files anti-chronologically
 	 :exclude ".*.draft.*"
 	 :makeindex t
 	 :recursive t
 	 :publishing-directory "/ssh:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
+
+(defun spm/org-publish-sitemap-default (title list)
+  "Default site map, as a string.
+TITLE is the the title of the site map.  LIST is an internal
+representation for the files to include, as returned by
+`org-list-to-lisp'.  PROJECT is the current project."
+  (concat
+   "#+TITLE: " title "\n\n"
+   "#+BEGIN_sitemap \n"
+   (org-list-to-org list)
+   "\n#+END_sitemap"))
+
+(defun spm/org-publish-sitemap-default-entry (entry style project)
+  "Default format for site map ENTRY, as a string.
+ENTRY is a file name.  STYLE is the style of the sitemap.
+PROJECT is the current project."
+  (cond ((not (directory-name-p entry))
+         (let ((is-blog-entry (cl-search "blog/" entry)))
+           (if (not is-blog-entry)
+               (org-publish-sitemap-default-entry entry style project)
+             (format "[[file:%s][%s %s]]"
+                   entry
+                   (format-time-string "%Y-%m-%d - " (org-publish-find-date entry project))
+                   (org-publish-find-title entry project)))))
+         ((eq style 'tree)
+          ;; Return only last subdir.
+          (file-name-nondirectory (directory-file-name entry)))
+         (t entry)))
 
 (defun jw/html-escape-attribute (value)
   "Entity-escape VALUE and wrap it in quotes."
@@ -287,7 +318,6 @@
                          (jw/html-escape-attribute class)
                          (or desc "")))
           (_ (or desc ""))))))
-;; (freesteph/load-theme-from-env)
 
 ;; docker
 (use-package dockerfile-mode
@@ -308,5 +338,57 @@
 (use-package haml-mode
   :ensure t)
 
-;; restclient
-(use-package restclient)
+;; ;; restclient
+;; (use-package restclient)
+
+;; organised steph
+(use-package org
+  :ensure t
+  :config (setf
+           org-directory (concat (getenv "HOME") "/Documents/cyborg")
+           org-log-done 'time
+           org-clock-idle-time 15
+           org-refile-targets '((org-agenda-files :maxlevel . 3))
+           org-default-notes-file (concat org-directory "/notes.org"))
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c b" . org-switchb)))
+
+(require 'org)
+(add-to-list 'org-modules 'org-habit)
+(require 'org-protocol)
+
+;; mu4e
+(require 'mu4e)
+
+(setf mu4e-get-mail-command "getmail"
+      mu4e-update-interval 300
+      mu4e-confirm-quit nil
+      mu4e-debug t)
+
+;; make 'o' capture the e-mail
+(define-key
+  mu4e-headers-mode-map
+  (kbd "o")
+  'mu4e-org-store-and-capture)
+
+(require 'ox-md)
+
+(global-set-key (kbd "C-=") 'mu4e)
+
+(use-package mu4e-alert
+  :init (mu4e-alert-enable-mode-line-display))
+
+(setq inhibit-splash-screen t)
+
+;; start on my org agenda
+(defun spm/load-agenda ()
+  (org-agenda-list)
+  (delete-other-windows))
+
+(add-hook 'after-init-hook 'spm/load-agenda)
+
+;;elescope
+;; (push (concat spm/sandbox-folder "elescope") load-path)
+;; (require 'elescope)

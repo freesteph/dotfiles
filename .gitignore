@@ -1,7 +1,7 @@
 # emacs auto
-emacs/dot-emacs.d/*
-emacs/dot-emacs.d/elpa
+emacs/.emacs.d/*
+emacs/.emacs.d/elpa
 
-!emacs/dot-emacs.d/snippets
-!spm-*
-!emacs/dot-emacs.d/bookmarks.gpg
+!emacs/.emacs.d/snippets
+!emacs/.emacs.d/spm
+!emacs/.emacs.d/bookmarks.gpg

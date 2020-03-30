@@ -20,19 +20,12 @@
 ;; have Emacs handle the decryption prompt
 (pinentry-start)
 
-;; custom files
-(defun spm/load-custom-files ()
-  "Load a list of maybe-encrypted files I maintain."
-  (let ((extensions '(spm-core spm-work init)))
-    (dolist (ext extensions)
-      (let* ((file (format "%s%s%s" user-emacs-directory ext ".el"))
-             (enc-file (concat file ".gpg")))
-        (message "loading %s..." file)
-        (or (and (file-exists-p file) (load file))
-            (and (file-exists-p enc-file) (load enc-file))
-            (message "could not find load file for %s" ext))))))
+;; init file
+(load (concat user-emacs-directory "init.el"))
 
-(add-hook 'after-init-hook 'spm/load-custom-files)
+;; custom files
+(push "/home/steph/.emacs.d/spm" load-path)
+(require 'spm-core)
 
 ;; bookmarks
 (require 'bookmark)
