@@ -27,7 +27,7 @@ alias ls="$reals -ahog --color=auto"
 
 # emacs client machinery
 alias e='emacsclient -nw'
-alias em='emacsclient -c -n'
+alias em='emacsclient -c -n -e "(toggle-frame-maximized)"'
 alias ke='emacsclient -e "(kill-emacs)"'
 
 # node version manager
