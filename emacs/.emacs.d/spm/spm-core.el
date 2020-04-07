@@ -47,6 +47,7 @@
 
 (require 'spm-js)
 (require 'spm-ruby)
+(require 'spm-css)
 
 (provide 'spm-core)
 ;;; spm-core.el ends here
