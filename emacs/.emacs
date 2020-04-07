@@ -30,11 +30,9 @@
 ;; bookmarks
 (require 'bookmark)
 
-(defun spm/load-bookmarks ()
-  "Load my encrypted bookmarks."
-  (bookmark-load (concat bookmark-default-file ".gpg")))
-
-(add-hook 'after-init-hook 'spm/load-bookmarks)
+(setf bookmark-default-file (concat
+                             user-emacs-directory
+                             "bookmarks.gpg"))
 
 ;; move custom declarations out of here
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
