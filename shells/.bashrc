@@ -8,6 +8,9 @@ export DEV_ROOT="$HOME/build"
 export DEV_PREFIX="$DEV_ROOT/os"
 export PATH="$DEV_PREFIX/bin:$PATH"
 
+export GOPATH=$DEV_PREFIX/go
+export PATH="$GOPATH/bin:$PATH"
+
 # PGP
 GPG_TTY=$(tty)
 export GPG_TTY
