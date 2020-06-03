@@ -43,14 +43,14 @@
                     :family "Overpass Mono"
                     :weight 'normal
                     :width 'normal
-		    :height 95)
+                    :height 95)
 
 (use-package swiper
   :ensure t
   :config (ivy-mode 1)
   :bind (("C-s" . counsel-grep-or-swiper)
          ("M-x" . counsel-M-x)
-	 ("M-/" . counsel-company)
+         ("M-/" . counsel-company)
          ("C-x C-f" . counsel-find-file)))
 
 (use-package ivy-prescient
@@ -174,14 +174,14 @@
   :init (dumb-jump-mode)
   :config
   (setq dumb-jump-selector 'ivy
-	dumb-jump-prefer-searcher 'rg))
+        dumb-jump-prefer-searcher 'rg))
 
 (use-package which-key
   :ensure t
   :config
   (which-key-mode 1)
   (setq which-key-popup-type 'side-window
-	which-key-side-window-location 'left))
+        which-key-side-window-location 'left))
 
 (global-set-key (kbd "C-x RET") 'toggle-frame-fullscreen)
 
@@ -210,12 +210,12 @@
 
 (setq electric-pair-inhibit-predicate #'sm/electric-pair-prohibit)
 
-;; mode
+;; elfeed
 (use-package elfeed
   :bind ("C-x w" . elfeed)
   :config
   (setq elfeed-feeds
-	'("http://nullprogram.com/feed/"
+        '("http://nullprogram.com/feed/"
           "https://blog.cleancoder.com/atom.xml"
           "https://www.reddit.com/r/emacs.rss"
           "https://ploum.net/feed/")))
@@ -230,15 +230,15 @@
   "Load a colour theme from environment variable EMACS_THEME."
   (let ((theme (getenv "EMACS_THEME")))
     (and (not (null theme))
-	 (seq-contains (custom-available-themes) (intern theme))
-	 (load-theme (intern theme) t))))
+         (seq-contains (custom-available-themes) (intern theme))
+         (load-theme (intern theme) t))))
 
 (freesteph/load-theme-from-env)
 
 (setq org-publish-project-alist
       '(("personal"
-	 :base-directory "~/build/steph/selfweb/notes/"
-	 :publishing-function org-html-publish-to-html
+         :base-directory "~/build/steph/selfweb/notes/"
+         :publishing-function org-html-publish-to-html
          :html-head "<link rel=\"stylesheet\" href=\"/style.css\" type=\"text/css\"/>\n
 <!-- Global site tag (gtag.js) - Google Analytics -->\n
 <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-4257569-2\"></script>\n
@@ -250,21 +250,21 @@
   gtag('config', 'UA-4257569-2');\n
 </script>\n
 "
-	 :with-author nil
-	 :with-toc nil
-	 :html-html5-fancy t
-	 :with-title nil
-	 :html-validation-link nil
-	 :section-numbers nil
-	 :auto-sitemap t
+         :with-author nil
+         :with-toc nil
+         :html-html5-fancy t
+         :with-title nil
+         :html-validation-link nil
+         :section-numbers nil
+         :auto-sitemap t
          :sitemap-title "Latest blog entries"
          :sitemap-format-entry spm/org-publish-sitemap-default-entry
          :sitemap-function spm/org-publish-sitemap-default
          :sitemap-sort-files anti-chronologically
-	 :exclude ".*.draft.*"
-	 :makeindex t
-	 :recursive t
-	 :publishing-directory "/ssh:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
+         :exclude ".*.draft.*"
+         :makeindex t
+         :recursive t
+         :publishing-directory "/ssh:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
 
 (defun spm/org-publish-sitemap-default (title list)
   "Default site map, as a string.
