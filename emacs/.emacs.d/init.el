@@ -218,7 +218,8 @@
         '("http://nullprogram.com/feed/"
           "https://blog.cleancoder.com/atom.xml"
           "https://www.reddit.com/r/emacs.rss"
-          "https://ploum.net/feed/")))
+          "https://ploum.net/feed/"
+          "https://w3c.studio24.net/feeds/updates.xml")))
 
 ;; e-mail things
 (let ((private-config "~/.emacs.d/private.el"))
