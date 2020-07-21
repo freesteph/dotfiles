@@ -70,3 +70,10 @@ fi
 
 # bundle parallel gems
 export BUNDLE_JOBS=4
+
+export EMACS_THEME="modus-operandi"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# tfenv
+export PATH="$HOME/.tfenv/bin:$PATH"
