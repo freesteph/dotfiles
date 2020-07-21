@@ -392,3 +392,8 @@ PROJECT is the current project."
 ;;elescope
 ;; (push (concat spm/sandbox-folder "elescope") load-path)
 ;; (require 'elescope)
+
+;; password managemnet
+(use-package pass
+  :ensure t)
+
