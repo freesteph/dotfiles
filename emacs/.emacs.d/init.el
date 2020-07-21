@@ -171,10 +171,9 @@
 
 (use-package dumb-jump
   :ensure t
-  :init (dumb-jump-mode)
   :config
-  (setq dumb-jump-selector 'ivy
-        dumb-jump-prefer-searcher 'rg))
+  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq dumb-jump-selector 'ivy))
 
 (use-package which-key
   :ensure t
