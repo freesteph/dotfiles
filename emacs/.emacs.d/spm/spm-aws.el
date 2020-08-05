@@ -2,21 +2,28 @@
 
 ;;; Commentary:
 
+;;; `spm/aws/update-aws-token' is to be called interactively and will
+;;; do the following:
+;;; 1. ask for a valid TOTP;
+;;; 2. format a command-line SNS command;
+;;; 3. parse the resulting JSON from AWS;
+;;; 4. format it into a valid set of credentials in ~/.aws/credentials
+
 (defvar spm/aws/pass-aws-path
   "work/aws/cli"
   "The path used to retrieve AWS profile information from `pass'.")
 
 (defvar spm/aws/pass-root-profile-field-name
   "profile"
-  "The field name to retrieve within `spm/aws/pass-aws-path' for the MFA AWS profile.")
+  "The pass field name to retrieve the name of the authenticating AWS profile.")
 
 (defvar spm/aws/pass-serial-field-name
   "mfa"
-  "The field name to retrieve within `spm/aws/pass-aws-path' for the MFA ARN.")
+  "The pass field name to retrieve the device serial number (ARN) to use for MFA.")
 
 (defvar spm/aws/pass-mfa-field-name
   "mfa_profile"
-  "The field name to retrieve within `spm/aws/pass-aws-path' for the MFA-ed profile.")
+  "The pass field name to retrieve the name of the resulting, MFA-ed, AWS profile.")
 
 ;;; Code:
 (defun spm/aws/format-sns-cmd ()
@@ -25,13 +32,21 @@
 It assumes you have `pass' set up with an entry stored at
 `spm/aws/pass-aws-path' containing:
 
-1. the name of the profile you wish to use in the
-`spm/aws/pass-aws-profile-field-name' field;
+1. the name of the calling profile you wish to use in the
+`spm/aws/pass-root-profile-field-name' field;
 
-2. the serial-number to identify the device you're going to
-authenticate with in a `spm/aws/pass-aws-serial-field-name'
-field."
-  (interactive)
+2. the serial-number to identify the device you're going to use
+in the `spm/aws/pass-serial-field-name' field;
+
+3. the name of the profile that must be updated with the valid
+token, designated with `spm/aws/pass-mfa-field-name'.
+
+These fields should coexist in a pass entry designated by (1), akin to:
+
+<password>
+mfa: XXX (2)
+profile: YYY (3)
+mfa_profile: ZZZ (4)."
   (let* ((token (read-from-minibuffer "Please enter an AWS token: "))
          (cmd "aws sts get-session-token")
          (profile (password-store-get-field
@@ -58,8 +73,8 @@ field."
 
 (defun spm/aws/overwrite-profile-with (profile-name data)
   "Overwrite the profile designated by PROFILE-NAME with DATA."
-  (save-excursion
-    (find-file "~/.aws/credentials")
+  (with-current-buffer
+      (find-file-noselect "~/.aws/credentials")
     (goto-char (point-min))
     (and (search-forward profile-name nil t)
          (progn
