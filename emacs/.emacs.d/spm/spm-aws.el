@@ -80,7 +80,8 @@ mfa_profile: ZZZ (4)."
          (progn
            (mark-paragraph)
            (kill-region (mark) (point))
-           (insert (format "\n[%s]\n%s\n" profile-name data))))))
+           (insert (format "\n[%s]\n%s\n" profile-name data))
+           (save-buffer)))))
 
 (defun spm/aws/update-aws-token ()
   "Grab an MFA token and update the revelant credentials in AWS creds file."
