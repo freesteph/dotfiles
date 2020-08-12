@@ -302,7 +302,9 @@ PROJECT is the current project."
 
 ;; vterm kills
 (use-package vterm
-  :ensure t)
+  :ensure t
+  :config (setf
+           vterm-kill-buffer-on-exit t))
 
 ;; unfill
 (use-package unfill)
