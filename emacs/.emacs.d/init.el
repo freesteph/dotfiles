@@ -324,8 +324,8 @@ PROJECT is the current project."
   :no-require t)
 
 ;; vterm kills
-(add-to-list 'load-path (format "%s/steph/emacs-libvterm" (getenv "DEV_ROOT")))
-(require 'vterm)
+(use-package vterm
+  :ensure t)
 
 ;; unfill
 (use-package unfill)
