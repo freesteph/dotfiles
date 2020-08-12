@@ -1,7 +1,8 @@
 ;; basic info
 (setf
  user-mail-address "stephane.maniaci@digital.cabinet-office.gov.uk"
- user-full-name  "Stéphane Maniaci")
+ user-full-name  "Stéphane Maniaci"
+ system-time-locale "C")
 
 ;; uncrowd modeline
 (use-package diminish
