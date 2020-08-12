@@ -267,6 +267,7 @@
          :recursive t
          :publishing-directory "/ssh:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
 
+(setf org-export-with-smart-quotes t)
 (defun spm/org-publish-sitemap-default (title list)
   "Default site map, as a string.
 TITLE is the the title of the site map.  LIST is an internal
@@ -294,31 +295,6 @@ PROJECT is the current project."
           ;; Return only last subdir.
           (file-name-nondirectory (directory-file-name entry)))
          (t entry)))
-
-(defun jw/html-escape-attribute (value)
-  "Entity-escape VALUE and wrap it in quotes."
-  ;; http://www.w3.org/TR/2009/WD-html5-20090212/serializing-html-fragments.html
-  ;;
-  ;; "Escaping a string... consists of replacing any occurrences of
-  ;; the "&" character by the string "&amp;", any occurrences of the
-  ;; U+00A0 NO-BREAK SPACE character by the string "&nbsp;", and, if
-  ;; the algorithm was invoked in the attribute mode, any occurrences
-  ;; of the """ character by the string "&quot;"..."
-  (let* ((value (replace-regexp-in-string "&" "&amp;" value))
-         (value (replace-regexp-in-string "\u00a0" "&nbsp;" value))
-         (value (replace-regexp-in-string "\"" "&quot;" value)))
-    value))
-
-
-(eval-after-load "org"
-  '(org-add-link-type
-    "span" #'ignore ; not an 'openable' link
-    #'(lambda (class desc format)
-        (pcase format
-          (`html (format "<span class=\"%s\">%s</span>"
-                         (jw/html-escape-attribute class)
-                         (or desc "")))
-          (_ (or desc ""))))))
 
 ;; docker
 (use-package dockerfile-mode
