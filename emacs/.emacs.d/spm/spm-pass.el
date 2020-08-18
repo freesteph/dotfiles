@@ -15,8 +15,7 @@
   (let ((id (nth 0 entry))
         (username (nth 1 entry))
         (email (nth 2 entry)))
-    (format "%s/%s/%s.gpg"
-            (password-store-dir)
+    (format "%s/%s.gpg"
             id
             (if (seq-empty-p username) email username))))
 
@@ -36,11 +35,7 @@
                                                 entry))
                                 options))
              (path (spm/pass/make-password-path rematch)))
-        (make-directory (file-name-directory path) t)
-        (save-excursion
-          (with-current-buffer (find-file path)
-            (insert (car (last rematch)))
-            (save-buffer)))))))
+        (password-store-insert path (car (last rematch)))))))
 
 (defun spm/pass/capture-csv-field-no-quotes ()
   "Capture the current CSV field without the surrounding quotes."
