@@ -3,13 +3,24 @@
 ;;; Commentary:
 ;;; Customisation for org.
 
-(require 'org-tempo)
 ;;; Code:
 (setf org-todo-keywords
       '((sequence "TODO" "DONE")
-        (sequence "TODO" "DISCUSSED(@!)" "WIP(w!)" "PR(@)" "MERGED" "DEPLOYED" "DONE"))
-      goto-interface 'outline-path-completion
-      org-outline-path-complete-in-steps nil)
+        (sequence
+         "TODO"
+         "DISCUSSED(d!@)"
+         "WIP(w!)"
+         "PR(p!@)"
+         "MERGED(m!)"
+         "DEPLOYED(D!)"
+         "|"
+         "DONE"
+         "DELEGATED(X!)"
+         "HALTED(h!)"))
+      org-goto-interface 'outline-path-completion
+      org-outline-path-complete-in-steps nil
+      org-use-fast-todo-selection t
+      org-agenda-log-mode-items '(closed clock state))
 
 
 ;; Example configuration
@@ -28,6 +39,7 @@
 
 (setq org-todo-keyword-faces
       '(("TODO" . org-warning)
+        ("HALTED" . org-warning)
         ("MERGED" . "blue")))
 
 (provide 'spm-org)

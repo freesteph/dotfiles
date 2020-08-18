@@ -1,7 +1,7 @@
 ;;; spm/work --- set of editing-related functions
 
 ;;; Commentary:
-;;; awkwardly honest functions I use for my work
+;;; awkwardly honest functions
 
 ;;; Code:
 
@@ -48,6 +48,9 @@
 (require 'spm-js)
 (require 'spm-ruby)
 (require 'spm-css)
+(require 'spm-pass)
+(require 'spm-aws)
+(require 'spm-org)
 
 (provide 'spm-core)
 ;;; spm-core.el ends here

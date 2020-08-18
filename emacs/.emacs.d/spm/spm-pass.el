@@ -57,7 +57,6 @@
 
 (defun spm/pass/copy-csv-column (&optional acc)
   "Copy column N into ACC until there is none left."
-  (interactive)
   (let ((options '()))
     (while (and
             (not (eq 1 (forward-line)))
@@ -70,5 +69,5 @@
         (push (list id username email pass) options)))
     options))
 
-(provide 'spm/pass)
+(provide 'spm-pass)
 ;;; spm-pass ends here

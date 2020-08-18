@@ -70,7 +70,7 @@
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy)
-  :bind ("C-c C-p" . 'projectile-command-map))
+  :bind ("C-c p" . 'projectile-command-map))
 
 (use-package counsel-projectile
   :ensure t
@@ -375,4 +375,3 @@ PROJECT is the current project."
 ;; password managemnet
 (use-package pass
   :ensure t)
-
