@@ -12,12 +12,13 @@
 
 (defun spm/pass/make-password-path (entry)
   "Formats a file path for ENTRY."
-  (let ((id (nth 0 entry))
-        (username (nth 1 entry))
-        (email (nth 2 entry)))
-    (format "%s/%s.gpg"
-            id
-            (if (seq-empty-p username) email username))))
+  (map-let (id username email) entry
+    (format "%s/%s" id (if (seq-empty-p username) email username))))
+
+(defun spm/pass/format-csv-entry (entry)
+  "Formats a list parsed from the ENTRY's CSV into a legible choice."
+  (map-let (id username email) entry
+    (format "%s | %s | %s" id username email)))
 
 (defun spm/pass/convert-csv-entry ()
   "Copy an entry from the backup passwords file in the store."
@@ -26,16 +27,13 @@
     (with-current-buffer (find-file spm/pass/csv-passwords-file)
       (goto-char (point-min))
       (let* ((options (spm/pass/copy-csv-column))
-             (entry (completing-read "Which entry do you want to port?"
-                                     (seq-map
-                                      (lambda (e) (format "%s | %s | %s" (car e) (cadr e) (caddr e)))
-                                      options)))
-             (rematch (seq-find (lambda (e)
-                                  (string-equal (format "%s | %s | %s" (car e) (cadr e) (caddr e))
-                                                entry))
-                                options))
-             (path (spm/pass/make-password-path rematch)))
-        (password-store-insert path (car (last rematch)))))))
+             (mapped (seq-map (lambda (entry)
+                                (cons (spm/pass/format-csv-entry entry) entry))
+                              options))
+             (choice (cdr (assoc (completing-read "Which entry do you want to port?" mapped) mapped))))
+        (password-store-insert
+         (spm/pass/make-password-path choice)
+         (alist-get 'password choice))))))
 
 (defun spm/pass/capture-csv-field-no-quotes ()
   "Capture the current CSV field without the surrounding quotes."
@@ -61,7 +59,10 @@
              (username (spm/pass/copy-nth-csv-line-field 2))
              (email (spm/pass/copy-nth-csv-line-field 3))
              (pass (spm/pass/copy-nth-csv-line-field 5)))
-        (push (list id username email pass) options)))
+        (push (list (cons 'id id)
+                    (cons 'username username)
+                    (cons 'email email)
+                    (cons 'password pass)) options)))
     options))
 
 (provide 'spm-pass)
