@@ -10,7 +10,7 @@
          "TODO"
          "DISCUSSED(d!@)"
          "WIP(w!)"
-         "PR(p!@)"
+         "PR(p@)"
          "MERGED(m!)"
          "DEPLOYED(D!)"
          "|"
