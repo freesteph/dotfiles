@@ -17,16 +17,6 @@
 ;; encode a special shortcut to open this blessed config file
 (global-set-key (kbd "C-;") 'spm/edit-init-el)
 
-
-;; org notepad
-(defun spm/open-pad ()
-  "Open my Org notepad."
-  (interactive)
-  (bookmark-jump "pad.org"))
-
-(global-set-key (kbd "C-#") 'spm/open-pad)
-
-
 (defun spm/make-shed (project-name)
   "Start a new project called PROJECT-NAME in my sandbox folder."
   (interactive "MProject name: ")
@@ -41,6 +31,24 @@
 	     (set-frame-font
 	      (replace-match (format "*-%d-*" font-size) nil nil current-font)))))
 
+;; wiktionary lookup
+(require 'thingatpt)
+
+(defvar spm/wiktionaries
+  '((fr . "https://fr.wiktionary.org/wiki/")
+    (en . "https://wiktionary.org/wiki/"))
+  "Map of languages and their corresponding Wiktionary URL.")
+
+(defun spm/lookup-in-wiktionary (&optional arg)
+  "Prompt for a word and look it up in Wiktionary.
+
+Switch the search to English (default is French) if called with
+the prefix argument ARG."
+  (interactive "P")
+  (let ((lang (if arg 'en 'fr))
+        (word (read-from-minibuffer "Word: " (word-at-point t))))
+    (eww (concat (alist-get lang spm/wiktionaries) word))))
+
 (and
  (file-exists-p "spm-work.el.gpg")
  (load-file "spm-work.el.gpg"))
@@ -51,6 +59,7 @@
 (require 'spm-pass)
 (require 'spm-aws)
 (require 'spm-org)
+(require 'spm-vpn)
 
 (provide 'spm-core)
 ;;; spm-core.el ends here
