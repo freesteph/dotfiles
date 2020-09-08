@@ -4,6 +4,10 @@
 ;;; Customisation for org.
 
 ;;; Code:
+(setf spm/org/agenda-files-dir (concat (getenv "HOME") "/Documents/cyborg/"))
+
+(setf org-agenda-files (directory-files spm/org/agenda-files-dir t "**.org$"))
+
 (setf org-todo-keywords
       '((sequence "TODO" "DONE")
         (sequence
@@ -41,6 +45,13 @@
       '(("TODO" . org-warning)
         ("HALTED" . org-warning)
         ("MERGED" . "blue")))
+
+(setf org-confirm-babel-evaluate nil)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (ruby . t)
+   (shell . t)))
 
 (provide 'spm-org)
 ;;; spm-org.el ends here
