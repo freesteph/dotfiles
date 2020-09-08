@@ -370,3 +370,10 @@ PROJECT is the current project."
 ;; password managemnet
 (use-package pass
   :ensure t)
+
+(use-package sqlup-mode
+  :config (add-hook 'sql-mode-hook 'sqlup-mode))
+
+
+(provide 'init)
+;;; init.el ends here
