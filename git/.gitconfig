@@ -1,7 +1,19 @@
+[user]
+	email = stephane.maniaci@gmail.com
+	name = Stéphane Maniaci
+	signingkey = BA90FA1C06BC6FD9
+
+[includeIf "gitdir:~/build/gds/"]
+    path = ~/build/gds/.gitconfig
+
+[github]
+	user = freesteph
+
+[commit]
+	gpgsign = true
+
+[diff "gpg"]
+	textconv = gpg --no-tty --decrypt
+
 [color]
 	ui = true
-[user]
-	name = Stéphane Maniaci
-	email = stephane.maniaci@gmail.com
-[push]
-	default = simple
