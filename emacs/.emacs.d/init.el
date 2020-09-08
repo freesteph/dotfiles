@@ -115,12 +115,6 @@
 ;; display time
 (display-time-mode 't)
 
-(use-package counsel
-  :bind
-  (("M-y" . counsel-yank-pop)
-   :map ivy-minibuffer-map
-   ("M-y" . ivy-next-line)))
-
 ;; terminal outputs
 ;; truncate buffers continuously
 (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
