@@ -27,12 +27,13 @@
 ;; js
 (setq js-indent-level 2)
 
-;; ;; web mode
-;; (use-package web-mode
-;;   :init (setq web-mode-markup-indent-offset 2)
-;;   :config
-;;   (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode)))
+;; web mode
+(use-package web-mode
+  :init (setq web-mode-markup-indent-offset 2)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
 
 ;; mac keys
