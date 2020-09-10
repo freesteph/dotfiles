@@ -45,7 +45,7 @@
 Switch the search to English (default is French) if called with
 the prefix argument ARG."
   (interactive "P")
-  (let ((lang (if arg 'en 'fr))
+  (let ((lang (or (and arg (completing-read "Language: " spm/wiktionaries)) 'fr))
         (word (read-from-minibuffer "Word: " (word-at-point t))))
     (eww (concat (alist-get lang spm/wiktionaries) word))))
 
