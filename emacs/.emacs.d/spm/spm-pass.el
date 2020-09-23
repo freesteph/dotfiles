@@ -62,7 +62,8 @@
         (push (list (cons 'id id)
                     (cons 'username username)
                     (cons 'email email)
-                    (cons 'password pass)) options)))
+                    (cons 'password pass))
+              options)))
     options))
 
 (provide 'spm-pass)

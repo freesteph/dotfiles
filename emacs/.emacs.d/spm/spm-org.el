@@ -6,7 +6,7 @@
 ;;; Code:
 (setf spm/org/agenda-files-dir (concat (getenv "HOME") "/Documents/cyborg/"))
 
-(setf org-agenda-files (directory-files spm/org/agenda-files-dir t "**.org$"))
+(setf org-agenda-files (directory-files spm/org/agenda-files-dir t ".*.org$"))
 
 (setf org-todo-keywords
       '((sequence "TODO" "DONE")
@@ -27,6 +27,7 @@
       org-agenda-log-mode-items '(closed clock state))
 
 
+(setq org-agenda-include-diary t)
 ;; Example configuration
 (setq counsel-org-goto-display-style 'path)
 (setq counsel-org-goto-separator " ➜ ")

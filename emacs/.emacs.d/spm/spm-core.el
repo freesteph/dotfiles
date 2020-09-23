@@ -53,13 +53,10 @@ the prefix argument ARG."
  (file-exists-p "spm-work.el.gpg")
  (load-file "spm-work.el.gpg"))
 
-(require 'spm-js)
-(require 'spm-ruby)
-(require 'spm-css)
-(require 'spm-pass)
-(require 'spm-aws)
-(require 'spm-org)
-(require 'spm-vpn)
+;; load all other files
+(dolist (file (directory-files "." nil "^spm-.*\.el"))
+  (unless (string-equal file "spm-core.el")
+    (load file)))
 
 (provide 'spm-core)
 ;;; spm-core.el ends here

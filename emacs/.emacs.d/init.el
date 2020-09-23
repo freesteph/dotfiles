@@ -55,10 +55,6 @@
          ("M-/" . counsel-company)
          ("C-x C-f" . counsel-find-file)))
 
-(use-package ivy-prescient
-  :config (ivy-prescient-mode)
-  :ensure t)
-
 (use-package company
   :ensure t
   :config (setq company-dabbrev-downcase nil)
@@ -93,7 +89,8 @@
   :ensure t
   :init (global-flycheck-mode)
   :config
-  (setq flycheck-enabled-checkers 'eslint))
+  (setq flycheck--automatically-enabled-checkers '(eslint scss-stylelint)
+        flycheck--automatically-disabled-checkers '(scss-lint)))
 
 (setq-default flycheck-disabled-checkers
   (append flycheck-disabled-checkers
@@ -144,7 +141,8 @@
 (use-package add-node-modules-path
   :ensure t
   :init
-  (add-hook 'js-mode-hook 'add-node-modules-path t))
+  (add-hook 'js-mode-hook 'add-node-modules-path t)
+  (add-hook 'scss-mode-hook 'add-node-modules-path t))
 
 (use-package yasnippet
   :ensure t
