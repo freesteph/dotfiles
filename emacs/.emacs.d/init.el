@@ -45,7 +45,7 @@
                     :family "Overpass Mono"
                     :weight 'normal
                     :width 'normal
-                    :height 95)
+                    :height 120)
 
 (use-package swiper
   :ensure t
@@ -97,7 +97,8 @@
     '(javascript-jshint)))
 
 ;; ace-window
- (use-package ace-window
+(use-package ace-window
+  :ensure t
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
@@ -300,7 +301,8 @@ PROJECT is the current project."
            vterm-kill-buffer-on-exit t))
 
 ;; unfill
-(use-package unfill)
+(use-package unfill
+  :ensure t)
 
 ;; yaml
 (use-package yaml-mode
@@ -330,27 +332,6 @@ PROJECT is the current project."
 (require 'org)
 (add-to-list 'org-modules 'org-habit)
 (require 'org-protocol)
-
-;; mu4e
-(require 'mu4e)
-
-(setf mu4e-get-mail-command "getmail"
-      mu4e-update-interval 300
-      mu4e-confirm-quit nil
-      mu4e-debug t)
-
-;; make 'o' capture the e-mail
-(define-key
-  mu4e-headers-mode-map
-  (kbd "o")
-  'mu4e-org-store-and-capture)
-
-(require 'ox-md)
-
-(global-set-key (kbd "C-=") 'mu4e)
-
-(use-package mu4e-alert
-  :init (mu4e-alert-enable-mode-line-display))
 
 (setq inhibit-splash-screen t)
 

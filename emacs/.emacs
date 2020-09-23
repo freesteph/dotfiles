@@ -14,8 +14,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; have Emacs handle the decryption prompt
-(pinentry-start)
 
 ;; init file
 (load (concat user-emacs-directory "init.el"))
