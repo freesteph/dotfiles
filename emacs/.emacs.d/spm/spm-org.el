@@ -4,9 +4,22 @@
 ;;; Customisation for org.
 
 ;;; Code:
-(setf spm/org/agenda-files-dir (concat (getenv "HOME") "/Documents/cyborg/"))
+(use-package org
+  :ensure t
+  :config (setf
+           org-directory (concat (getenv "HOME") "/Documents/cyborg")
+           org-log-done 'time
+           org-clock-idle-time 15
+           org-refile-targets '((org-agenda-files :maxlevel . 5))
+           org-default-notes-file (concat org-directory "/notes.org")
+           org-agenda-files (list org-directory))
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c b" . org-switchb)))
 
-(setf org-agenda-files (directory-files spm/org/agenda-files-dir t ".*.org$"))
+(require 'org)
+(require 'org-protocol)
 
 (setf org-todo-keywords
       '((sequence "TODO" "DONE")
@@ -32,6 +45,7 @@
 (setq counsel-org-goto-display-style 'path)
 (setq counsel-org-goto-separator " ➜ ")
 (setq counsel-org-goto-face-style 'org)
+
 (define-key org-mode-map (kbd "C-c C-j") 'counsel-org-goto)
 (define-key org-mode-map (kbd "C-u C-c C-j") 'counsel-org-goto-all)
 
@@ -53,6 +67,13 @@
  '((emacs-lisp . t)
    (ruby . t)
    (shell . t)))
+
+(require 'org-trello)
+(custom-set-variables '(org-trello-files '("~/Documents/cyborg/trello.org")))
+
+
+;; 82caf67b35486188bc4b64460ae1c22cb9170d9fc021e50904dcb7da1c5018a8
+
 
 (provide 'spm-org)
 ;;; spm-org.el ends here

@@ -56,7 +56,7 @@ the prefix argument ARG."
 ;; load all other files
 (dolist (file (directory-files "." nil "^spm-.*\.el"))
   (unless (string-equal file "spm-core.el")
-    (load file)))
+    (load-file file)))
 
 (provide 'spm-core)
 ;;; spm-core.el ends here

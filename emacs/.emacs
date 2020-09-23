@@ -21,8 +21,7 @@
 (load (concat user-emacs-directory "init.el"))
 
 ;; custom files
-(push "/home/steph/.emacs.d/spm" load-path)
-(require 'spm-core)
+(load (concat (getenv "HOME") "/.emacs.d/spm/spm-core.el"))
 
 ;; bookmarks
 (require 'bookmark)
