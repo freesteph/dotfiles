@@ -4,7 +4,6 @@
 ;;; awkwardly honest functions
 
 ;;; Code:
-
 (defvar spm/sandbox-folder
   (file-name-as-directory (concat (getenv "DEV_ROOT") "/steph/sandbox"))
   "Directory hosting sandbox projects.")
@@ -49,14 +48,14 @@ the prefix argument ARG."
         (word (read-from-minibuffer "Word: " (word-at-point t))))
     (eww (concat (alist-get lang spm/wiktionaries) word))))
 
+;; load all other files
+(dolist (file (directory-files (concat user-emacs-directory "spm/") t "^spm-.*\.el$"))
+  (unless (string-equal (file-name-base file) "spm-core")
+    (load-file file)))
+
 (and
  (file-exists-p "spm-work.el.gpg")
  (load-file "spm-work.el.gpg"))
-
-;; load all other files
-(dolist (file (directory-files "." nil "^spm-.*\.el"))
-  (unless (string-equal file "spm-core.el")
-    (load-file file)))
 
 (provide 'spm-core)
 ;;; spm-core.el ends here

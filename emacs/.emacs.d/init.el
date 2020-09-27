@@ -45,7 +45,7 @@
                     :family "Overpass Mono"
                     :weight 'normal
                     :width 'normal
-                    :height 120)
+                    :height 95)
 
 (use-package swiper
   :ensure t
@@ -97,8 +97,7 @@
     '(javascript-jshint)))
 
 ;; ace-window
-(use-package ace-window
-  :ensure t
+ (use-package ace-window
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
@@ -301,8 +300,7 @@ PROJECT is the current project."
            vterm-kill-buffer-on-exit t))
 
 ;; unfill
-(use-package unfill
-  :ensure t)
+(use-package unfill)
 
 ;; yaml
 (use-package yaml-mode
@@ -315,23 +313,26 @@ PROJECT is the current project."
 ;; ;; restclient
 ;; (use-package restclient)
 
-;; organised steph
-(use-package org
-  :ensure t
-  :config (setf
-           org-directory (concat (getenv "HOME") "/Documents/cyborg")
-           org-log-done 'time
-           org-clock-idle-time 15
-           org-refile-targets '((org-agenda-files :maxlevel . 3))
-           org-default-notes-file (concat org-directory "/notes.org"))
-  :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c c" . org-capture)
-         ("C-c b" . org-switchb)))
+;; mu4e
+(require 'mu4e)
 
-(require 'org)
-(add-to-list 'org-modules 'org-habit)
-(require 'org-protocol)
+(setf mu4e-get-mail-command "getmail"
+      mu4e-update-interval 300
+      mu4e-confirm-quit nil
+      mu4e-debug t)
+
+;; make 'o' capture the e-mail
+(define-key
+  mu4e-headers-mode-map
+  (kbd "o")
+  'mu4e-org-store-and-capture)
+
+(require 'ox-md)
+
+(global-set-key (kbd "C-=") 'mu4e)
+
+(use-package mu4e-alert
+  :init (mu4e-alert-enable-mode-line-display))
 
 (setq inhibit-splash-screen t)
 

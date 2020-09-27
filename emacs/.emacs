@@ -16,10 +16,10 @@
 
 
 ;; init file
-(load (concat user-emacs-directory "init.el"))
+(load-file (concat user-emacs-directory "init.el"))
 
 ;; custom files
-(load (concat (getenv "HOME") "/.emacs.d/spm/spm-core.el"))
+(load-file (concat user-emacs-directory "spm/spm-core.el"))
 
 ;; bookmarks
 (require 'bookmark)
