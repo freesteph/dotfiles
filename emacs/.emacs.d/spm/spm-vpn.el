@@ -41,10 +41,12 @@ host: HOST"
 
 (defun spm/vpn/is-connected-p ()
   "Return non-nil if there is already an active VPN connection."
+  (interactive)
   (spm/vpn/issue-command "status" #'spm/vpn/status-is-connected-p))
 
 (defun spm/vpn/disconnect ()
   "Disconnect the current VPN connection."
+  (interactive)
   (spm/vpn/issue-command "disconnect")
   t)
 
