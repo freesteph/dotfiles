@@ -42,7 +42,10 @@ host: HOST"
 (defun spm/vpn/is-connected-p ()
   "Return non-nil if there is already an active VPN connection."
   (interactive)
-  (spm/vpn/issue-command "status" #'spm/vpn/status-is-connected-p))
+  (let ((connected (spm/vpn/issue-command "status" #'spm/vpn/status-is-connected-p)))
+    (if (called-interactively-p 'any)
+        (message (concat "You are " (and (not connected) "not ") "connected to the GDS VPN."))
+      connected)))
 
 (defun spm/vpn/disconnect ()
   "Disconnect the current VPN connection."
