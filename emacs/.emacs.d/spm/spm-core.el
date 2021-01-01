@@ -53,9 +53,9 @@ the prefix argument ARG."
   (unless (string-equal (file-name-base file) "spm-core")
     (load-file file)))
 
-(and
- (file-exists-p "spm-work.el.gpg")
- (load-file "spm-work.el.gpg"))
+(let ((work-file (concat user-emacs-directory "spm/spm-work.el.gpg")))
+  (and (file-exists-p work-file)
+       (load-file work-file)))
 
 (provide 'spm-core)
 ;;; spm-core.el ends here

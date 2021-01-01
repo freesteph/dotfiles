@@ -349,7 +349,9 @@ PROJECT is the current project."
 
 ;; password managemnet
 (use-package pass
-  :ensure t)
+  :ensure t
+  :config
+  (setf pass-username-fallback-on-filename t))
 
 (use-package sqlup-mode
   :config (add-hook 'sql-mode-hook 'sqlup-mode))
