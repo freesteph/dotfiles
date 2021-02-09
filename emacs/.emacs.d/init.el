@@ -24,6 +24,9 @@
 ;; tabs
 (set-default 'indent-tabs-mode nil)
 
+;; diff
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 ;; js
 (setq js-indent-level 2)
 
