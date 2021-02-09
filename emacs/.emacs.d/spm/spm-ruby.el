@@ -23,5 +23,6 @@
           (lambda ()
             (local-set-key (kbd "C-c C-f") 'spm/ruby/toggle-rspec-focus)))
 
+(setf ruby-insert-encoding-magic-comment nil)
 (provide 'spm-ruby)
 ;;; spm-ruby.el ends here
