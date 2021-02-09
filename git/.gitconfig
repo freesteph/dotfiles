@@ -6,6 +6,12 @@
 [includeIf "gitdir:~/build/gds/"]
     path = ~/build/gds/.gitconfig
 
+[includeIf "gitdir:~/build/unboxed/"]
+    path = ~/build/unboxed/.gitconfig
+
+[includeIf "gitdir:~/build/ScottishParliament/"]
+    path = ~/build/unboxed/.gitconfig
+
 [github]
 	user = freesteph
 
