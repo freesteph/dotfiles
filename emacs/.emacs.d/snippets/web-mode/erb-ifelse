@@ -1,0 +1,10 @@
+# key: ifelse
+# name: erb/conditional
+# binding: C-c C-q e
+# expand-env: ((yas-wrap-around-region t))
+# --
+<% if $1 %>
+  $0
+<% else %>
+  $2
+<% end %>

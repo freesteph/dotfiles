@@ -1,0 +1,8 @@
+# key: if
+# name: erb if
+# binding: C-c C-q i
+# expand-env: ((yas-wrap-around-region t))
+# --
+<% if $1 %>
+  $0
+<% end %>
