@@ -1,1 +1,3 @@
 notification :off
+
+ignore(/\/?\.\#/)
