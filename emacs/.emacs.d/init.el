@@ -1,4 +1,5 @@
 ;; basic info
+
 (setf
  user-mail-address "stephane.maniaci@digital.cabinet-office.gov.uk"
  user-full-name  "Stéphane Maniaci"
@@ -18,8 +19,10 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-;; GPG stuff
-(setf epg-pinentry-mode 'loopback)
+(setf inhibit-splash-screen t
+      menu-bar-mode nil
+      tool-bar-mode nil
+      scroll-bar-mode nil)
 
 ;; tabs
 (set-default 'indent-tabs-mode nil)
@@ -45,10 +48,11 @@
 
 ; default font
 (set-face-attribute 'default nil
-                    :family "Overpass Mono"
+                    :family "IBM Plex Mono"
                     :weight 'normal
                     :width 'normal
-                    :height 95)
+                    :slant 'italic
+                    :height 90)
 
 (use-package swiper
   :ensure t
@@ -92,7 +96,7 @@
   :ensure t
   :init (global-flycheck-mode)
   :config
-  (setq flycheck--automatically-enabled-checkers '(eslint scss-stylelint)
+  (setq flycheck--automatically-enabled-checkers '(eslint scss-stylelint standard)
         flycheck--automatically-disabled-checkers '(scss-lint)))
 
 (setq-default flycheck-disabled-checkers
@@ -183,9 +187,12 @@
 
 ;; dired
 ;; use ls coloured, long listing, all files, vertical, omitting group
-(setq dired-listing-switches "-Ghla1o")
-(setq dired-auto-revert-buffer t)
-(setq dired-dwim-target t)
+(setf dired-listing-switches "-Ghla1o"
+      dired-auto-revert-buffer t
+      dired-dwim-target t)
+
+;; GPG
+(setf epg-pinentry-mode 'loopback)
 
 ;; paint colour hexs
 (use-package rainbow-mode
@@ -261,7 +268,7 @@
          :exclude ".*.draft.*"
          :makeindex t
          :recursive t
-         :publishing-directory "/ssh:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
+         :publishing-directory "/sshx:freesteph@ssh-freesteph.alwaysdata.net:/home/freesteph/www/self/")))
 
 (setf org-export-with-smart-quotes t)
 (defun spm/org-publish-sitemap-default (title list)
@@ -316,28 +323,8 @@ PROJECT is the current project."
 ;; ;; restclient
 ;; (use-package restclient)
 
-;; mu4e
-(require 'mu4e)
-
-(setf mu4e-get-mail-command "getmail"
-      mu4e-update-interval 300
-      mu4e-confirm-quit nil
-      mu4e-debug t)
-
-;; make 'o' capture the e-mail
-(define-key
-  mu4e-headers-mode-map
-  (kbd "o")
-  'mu4e-org-store-and-capture)
-
-(require 'ox-md)
-
-(global-set-key (kbd "C-=") 'mu4e)
-
-(use-package mu4e-alert
-  :init (mu4e-alert-enable-mode-line-display))
-
-(setq inhibit-splash-screen t)
+;; org + markdown
+;; (require 'ox-md)
 
 ;; start on my org agenda
 (defun spm/load-agenda ()
@@ -345,10 +332,6 @@ PROJECT is the current project."
   (delete-other-windows))
 
 (add-hook 'after-init-hook 'spm/load-agenda)
-
-;;elescope
-;; (push (concat spm/sandbox-folder "elescope") load-path)
-;; (require 'elescope)
 
 ;; password managemnet
 (use-package pass
@@ -359,6 +342,35 @@ PROJECT is the current project."
 (use-package sqlup-mode
   :config (add-hook 'sql-mode-hook 'sqlup-mode))
 
+(use-package moody
+  :ensure t
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
+
+(use-package nginx-mode
+  :ensure t)
+
+(use-package package-lint)
+
+(use-package elescope
+  :ensure t
+  :config
+  (setf elescope-root-folder "~/build/"
+        elescope-clone-depth nil
+        elescope-use-full-path t
+        elescope-github-token nil))
+
+(use-package pomidor
+  :ensure t
+  :config
+  (setf pomidor-sound-tick nil
+        pomidor-sound-tack nil))
+
+(use-package graphviz-dot-mode
+  :config
+  (setf graphviz-dot-preview-extension "svg"))
 
 (provide 'init)
 ;;; init.el ends here
