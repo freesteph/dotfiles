@@ -56,7 +56,7 @@
   "Display the full path of the key at point."
   (interactive)
   (let ((path (spm/yaml/get-full-path-at-point)))
-    (message "Current path: %s" (s-join "/" path))))
+    (message "Current path: %s" (s-join "/" (reverse path)))))
 
 (provide 'spm-yaml)
 ;;; spm-yaml.el ends here
