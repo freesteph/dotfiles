@@ -49,7 +49,7 @@
           ()
         (if (re-search-backward (spm/yaml/key-regexp-at-column (- offset 1)))
             (cons (substring-no-properties (match-string 1))
-                  (spm/yaml/display-full-path-at-point))
+                  (spm/yaml/get-full-path-at-point))
           ())))))
 
 (defun spm/yaml/print-full-path-at-point ()
