@@ -60,7 +60,9 @@
   :bind (("C-s" . counsel-grep-or-swiper)
          ("M-x" . counsel-M-x)
          ("M-/" . counsel-company)
-         ("C-x C-f" . counsel-find-file)))
+         ("C-x C-f" . counsel-find-file)
+         ("C-h f" . counsel-describe-function)
+         ("C-h v" . counsel-describe-variable)))
 
 (use-package company
   :ensure t
@@ -303,6 +305,10 @@ PROJECT is the current project."
 (use-package dockerfile-mode
   :no-require t)
 
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))
+
 ;; vterm kills
 (use-package vterm
   :ensure t
@@ -371,6 +377,37 @@ PROJECT is the current project."
 (use-package graphviz-dot-mode
   :config
   (setf graphviz-dot-preview-extension "svg"))
+
+(use-package emms
+  :config
+  (progn
+    (require 'emms-setup)
+    (emms-standard)
+    (emms-default-players))
+  (setf emms-source-file-default-directory "~/Music")
+  :bind ("<pause>" . emms-pause))
+
+(use-package feature-mode
+  :config
+  (setf feature-docker-compose-container "web"))
+
+(use-package soundklaus
+  :ensure t
+  :commands
+  (soundklaus-activities
+   soundklaus-connect
+   soundklaus-my-favorites
+   soundklaus-my-playlists
+   soundklaus-my-tracks
+   soundklaus-playlists
+   soundklaus-tracks))
+
+(use-package browse-at-remote
+  :ensure t)
+
+(use-package projectile-rails
+  :config
+  (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map))
 
 (provide 'init)
 ;;; init.el ends here
