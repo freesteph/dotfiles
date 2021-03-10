@@ -11,9 +11,9 @@
 
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
 
+;; thanks but no thanks
+(setf create-lockfiles nil)
 
 ;; init file
 (load-file (concat user-emacs-directory "init.el"))
