@@ -60,6 +60,7 @@
   :bind (("C-s" . counsel-grep-or-swiper)
          ("M-x" . counsel-M-x)
          ("M-/" . counsel-company)
+         ("M-y" . counsel-yank-pop)
          ("C-x C-f" . counsel-find-file)
          ("C-h f" . counsel-describe-function)
          ("C-h v" . counsel-describe-variable)))
@@ -408,6 +409,17 @@ PROJECT is the current project."
 (use-package projectile-rails
   :config
   (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map))
+
+(use-package ruby-electric
+  :ensure t
+  :config
+  (add-hook 'ruby-mode-hook
+            #'ruby-electric-mode))
+
+(use-package ivy-xref
+  :ensure t
+  :config
+  (setf xref-show-definitions-function #'ivy-xref-show-defs))
 
 (provide 'init)
 ;;; init.el ends here
