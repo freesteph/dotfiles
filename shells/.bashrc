@@ -77,3 +77,9 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # tfenv
 export PATH="$HOME/.tfenv/bin:$PATH"
+
+# python modules
+export PATH="$HOME/.local/bin:$PATH"
+
+# go modules
+export PATH="$HOME/.cargo/bin:$PATH"
