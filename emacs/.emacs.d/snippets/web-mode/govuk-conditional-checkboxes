@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: GOV.UK Optional CHeckbox
+# key: guoch
+# --
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="${1:attribute-name}-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+      <span class="govuk-fieldset__heading">
+        ${2:A header for this group of checkboxes}
+      </span>
+    </legend>
+    <div id="$1-hint" class="govuk-hint">
+      ${3:A hint for the group of checkboxes}
+    </div>
+    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+      <% ${4:@survey.options}.reject {|s| s == "other" }.each do |${5:option}| %>
+      <div class="govuk-checkboxes__item">
+        <%= form.check_box :$1, { class: "govuk-checkboxes__input", id: "$1_#{$5}", multiple: true }, $5, nil %>
+        <%= form.label :$1, value: $5, class: "govuk-label govuk-checkboxes__label" %>
+
+        <% if I18n.exists?("helpers.hints.${6:survey.options}.#{$5}") %>
+        <div id="$1-<%= $5 %>-hint" class="govuk-hint govuk-checkboxes__hint">
+          <%= t("helpers.hints.$6.#{$5}") %>
+        </div>
+        <% end %>
+      </div>
+      <% end %>
+      <div class="govuk-checkboxes__item">
+        <%= form.check_box :$1, { class: "govuk-checkboxes__input", id: "$1_other", multiple: true, data: { "aria-controls": "conditional-other-$1" }}, "other", nil %>
+        <%= form.label :$1, value: "other", class: "govuk-label govuk-checkboxes__label" %>
+      </div>
+      <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-other-$1">
+        <div class="govuk-form-group">
+          <%= form.label :${7:$1}_details, class: "govuk-label" %>
+          <%= form.text_area :$7_details, class: "govuk-textarea" %>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>

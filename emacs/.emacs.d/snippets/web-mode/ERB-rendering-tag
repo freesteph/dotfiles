@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ERB rendering tag
+# key: ert
+# --
+<%= $0 %>

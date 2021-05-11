@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: govuk-textarea
+# key: gti
+# --
+<div class="govuk-form-group">
+<%= form.label :${1:}, class: "govuk-label govuk-label--m" %>
+<div id="$1-hint" class="govuk-hint">
+This should be a hint about this field.
+</div>
+<%= form.text_input :$1, class: "govuk-textarea" %>
+</div>

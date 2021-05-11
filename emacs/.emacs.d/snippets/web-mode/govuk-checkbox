@@ -1,0 +1,27 @@
+# key: guch
+# name: govuk checkbox
+# --
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+      <span class="govuk-fieldset__heading">
+        ${1:Header for the checkboxes}
+      </span>
+    </legend>
+    <div id="${2:field}-hint" class="govuk-hint">
+      ${3:Some hint for the checkboxes.}
+    </div>
+    <div class="govuk-checkboxes">
+      <% ${4:@survey.options}.each do |${5:option}| %>
+      <div class="govuk-checkboxes__item">
+        <%= form.check_box :$2, { class: "govuk-checkboxes__input", id: "$6_$2_#{$5}" }, $5 %>
+        <%= form.label :$2, value: $5, class: "govuk-label govuk-checkboxes__label" %>
+
+        <div id="<%= $5 %>-hint" class="govuk-hint govuk-checkboxes__hint">
+          A hint for this particular option
+        </div>
+      </div>
+     <% end %>
+    </div>
+  </fieldset>
+</div>
