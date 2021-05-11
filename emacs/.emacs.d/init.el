@@ -22,7 +22,8 @@
 (setf inhibit-splash-screen t
       menu-bar-mode nil
       tool-bar-mode nil
-      scroll-bar-mode nil)
+      scroll-bar-mode nil
+      display-time-default-load-average nil)
 
 ;; tabs
 (set-default 'indent-tabs-mode nil)
@@ -364,7 +365,7 @@ PROJECT is the current project."
 (use-package elescope
   :ensure t
   :config
-  (setf elescope-root-folder "~/build/"
+  (setf elescope-root-folder "~/build/steph/gh"
         elescope-clone-depth nil
         elescope-use-full-path t
         elescope-github-token nil))
@@ -410,6 +411,20 @@ PROJECT is the current project."
   :config
   (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map))
 
+(use-package popper
+  :ensure t ; or :straight t
+  :bind (("C-#"   . popper-toggle-latest)
+         ("M-#"   . popper-cycle)
+         ("C-M-#" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "*xref*"
+          help-mode
+          compilation-mode))
+  (popper-mode +1))
+
 (use-package ruby-electric
   :ensure t
   :config
@@ -420,6 +435,10 @@ PROJECT is the current project."
   :ensure t
   :config
   (setf xref-show-definitions-function #'ivy-xref-show-defs))
+
+(use-package gif-screencast
+  :config
+  (setf gif-screencast-capture-prefer-internal t))
 
 (provide 'init)
 ;;; init.el ends here
