@@ -1,3 +1,4 @@
+(setf ruby-insert-encoding-magic-comment nil)
 
 (defun spm/ruby/toggle-rspec-focus ()
   "Toggle focused-mode for the Rspec test at point."
