@@ -1,7 +1,7 @@
 ;; basic info
 
 (setf
- user-mail-address "stephane.maniaci@digital.cabinet-office.gov.uk"
+ user-mail-address "stephane.maniaci@unboxedconsulting.com"
  user-full-name  "Stéphane Maniaci"
  system-time-locale "C")
 
@@ -53,7 +53,7 @@
                     :weight 'normal
                     :width 'normal
                     :slant 'italic
-                    :height 90)
+                    :height 120)
 
 (use-package swiper
   :ensure t
