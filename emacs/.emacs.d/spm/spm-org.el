@@ -4,15 +4,18 @@
 ;;; Customisation for org.
 
 ;;; Code:
+(add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
+
 (use-package org
   :ensure t
   :config (setf
-           org-directory (concat (getenv "HOME") "/Documents/cyborg")
+           org-directory (concat (getenv "HOME") "/Documents/cyborg/")
            org-log-done 'time
            org-clock-idle-time 15
            org-refile-targets '((org-agenda-files :maxlevel . 5))
            org-default-notes-file (concat org-directory "/notes.org")
-           org-agenda-files (list org-directory))
+           org-agenda-files (list org-directory)
+           org-src-tab-acts-natively t)
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
          ("C-c c" . org-capture)
@@ -41,10 +44,11 @@
 
 
 (setq org-agenda-include-diary t)
-;; Example configuration
-(setq counsel-org-goto-display-style 'path)
-(setq counsel-org-goto-separator " ➜ ")
-(setq counsel-org-goto-face-style 'org)
+
+;; counsel-org-goto
+(setf counsel-org-goto-display-style 'path
+      counsel-org-goto-separator " ➜ "
+      counsel-org-goto-face-style 'org)
 
 (define-key org-mode-map (kbd "C-c C-j") 'counsel-org-goto)
 (define-key org-mode-map (kbd "C-u C-c C-j") 'counsel-org-goto-all)
@@ -62,18 +66,20 @@
         ("MERGED" . "blue")))
 
 (setf org-confirm-babel-evaluate nil)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (ruby . t)
-   (shell . t)))
-
-(require 'org-trello)
-(custom-set-variables '(org-trello-files '("~/Documents/cyborg/trello.org")))
-
-
-;; 82caf67b35486188bc4b64460ae1c22cb9170d9fc021e50904dcb7da1c5018a8
-
+   (shell . t)
+   (restclient . t)))
 
 (provide 'spm-org)
 ;;; spm-org.el ends here
+
+(defun spm/org/table-cell-select ()
+  "Mark the current org-table cell."
+  (interactive)
+  (org-table-beginning-of-field)
+  (set-mark (point))
+  (org-table-end-of-field))
