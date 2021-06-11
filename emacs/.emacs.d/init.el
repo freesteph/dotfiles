@@ -43,9 +43,13 @@
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
 
-;; mac keys
+;; Mac keys
 (setq mac-command-modifier 'meta
       mac-option-modifier 'super)
+
+;; Allow Option to function normally on OSX
+(if (boundp 'ns-option-modifier)
+    (setq ns-option-modifier nil))
 
 ; default font
 (set-face-attribute 'default nil
