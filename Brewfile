@@ -14,3 +14,4 @@ brew "ghostscript"
 
 brew tap "homebrew/cask-fonts"
 brew install "font-overpass"
+brew install "font-plex"
