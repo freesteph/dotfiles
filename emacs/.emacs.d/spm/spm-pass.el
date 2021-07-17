@@ -24,7 +24,8 @@
   "Copy an entry from the backup passwords file in the store."
   (interactive)
   (save-excursion
-    (with-current-buffer (find-file spm/pass/csv-passwords-file)
+    (with-temp-buffer
+      (insert-file-contents spm/pass/csv-passwords-file)
       (goto-char (point-min))
       (let* ((options (spm/pass/copy-csv-column))
              (mapped (seq-map (lambda (entry)
