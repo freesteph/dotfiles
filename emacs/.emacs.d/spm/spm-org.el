@@ -6,7 +6,11 @@
 ;;; Code:
 (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
 
+(use-package ob-restclient
+  :straight t)
+
 (use-package org
+  :straight t
   :ensure t
   :config (setf
            org-directory (concat (getenv "HOME") "/Documents/cyborg/")
