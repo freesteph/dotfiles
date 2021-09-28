@@ -7,6 +7,9 @@
 (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
+(use-package org-reveal
+  :straight t)
+
 (use-package ob-restclient
   :straight t)
 
