@@ -13,6 +13,9 @@
 (use-package ob-restclient
   :straight t)
 
+(use-package ob-async
+  :straight t)
+
 (use-package org
   :straight t
   :ensure t
@@ -31,6 +34,7 @@
 
 (require 'org)
 (require 'org-protocol)
+(require 'ob-async)
 
 (setf org-todo-keywords
       '((sequence "TODO" "DONE")
