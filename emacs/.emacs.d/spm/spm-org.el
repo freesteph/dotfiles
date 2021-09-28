@@ -5,6 +5,7 @@
 
 ;;; Code:
 (add-hook 'org-mode-hook (lambda () (electric-indent-local-mode -1)))
+(add-hook 'org-mode-hook 'auto-fill-mode)
 
 (use-package ob-restclient
   :straight t)
