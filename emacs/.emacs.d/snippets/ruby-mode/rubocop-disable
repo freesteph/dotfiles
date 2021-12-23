@@ -1,0 +1,7 @@
+# key: rbd
+# name: Rubocop disable
+# expand-env: ((yas-wrap-around-region t))
+# --
+# rubocop:disable $1
+$0
+# rubocop:enable $1
