@@ -31,7 +31,7 @@
              (mapped (seq-map (lambda (entry)
                                 (cons (spm/pass/format-csv-entry entry) entry))
                               options))
-             (choice (cdr (assoc (completing-read "Which entry do you want to port?" mapped) mapped))))
+             (choice (cdr (assoc (completing-read "Entry to port: " mapped) mapped))))
         (password-store-insert
          (spm/pass/make-password-path choice)
          (alist-get 'password choice))))))
