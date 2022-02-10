@@ -26,14 +26,28 @@
 ;;; Code:
 (defun spm/yaml/key-regexp-at-column (column)
   "Build a regular expression to search for a key at COLUMN."
-  (format "^[[:blank:]]\\{,%s\\}\\([[:word:]-]+\\)" column))
+  (format "^[[:blank:]]\\{%s,%s\\}\\([[:word:]_-]+\\)" column column))
 
 (defun spm/yaml/collect-keys-at-point ()
+  (interactive)
   "Collect all keys aligned at point."
   (save-excursion
     (back-to-indentation)
     (let* ((offset (current-column))
            (key-regexp (spm/yaml/key-regexp-at-column offset))
+           (matches ()))
+      (goto-char (point-min))
+      (while (re-search-forward key-regexp nil t)
+        (setf matches (cons (match-string 1) matches)))
+      (reverse (mapcar #'substring-no-properties matches)))))
+
+(defun spm/yaml/collect-keys-under-point ()
+  "Collects all keys under point."
+  "Collect all keys aligned at point."
+  (save-excursion
+    (back-to-indentation)
+    (let* ((offset (current-column))
+           (key-regexp (spm/yaml/key-regexp-at-column (+ 2 offset)))
            (matches ()))
       (goto-char (point-min))
       (while (re-search-forward key-regexp nil t)
@@ -52,11 +66,36 @@
                   (spm/yaml/get-full-path-at-point))
           ())))))
 
+(defun spm/yaml/get-key-at-point ()
+  "Get the YAML key at point"
+  (save-excursion
+    (back-to-indentation)
+    (let ((key-regexp (spm/yaml/key-regexp-at-column (current-column))))
+      (beginning-of-line)
+      (and (re-search-forward key-regexp)
+           (substring-no-properties (match-string 1))))))
+
 (defun spm/yaml/print-full-path-at-point ()
   "Display the full path of the key at point."
   (interactive)
-  (let ((path (spm/yaml/get-full-path-at-point)))
-    (message "Current path: %s" (s-join "/" (reverse path)))))
+  (let ((path (spm/yaml/get-full-path-at-point))
+        (current-key (spm/yaml/get-key-at-point)))
+    (message "Current path: %s" (s-join "/" (reverse (cons current-key path))))))
+
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map (kbd "C-c C-c") 'spm/yaml/print-full-path-at-point)))
+
+(defun spm/yaml/navigate-to-key ()
+  (interactive)
+
+  (back-to-indentation)
+  (let* ((keys (spm/yaml/collect-keys-at-point))
+         (key (ivy-completing-read "Choose key: " keys))
+         (re (format "^[[:blank:]]?+%s" key)))
+    (re-search-forward re nil t)
+    (forward-line)
+    (spm/yaml/navigate-to-key)))
 
 (provide 'spm-yaml)
 ;;; spm-yaml.el ends here
