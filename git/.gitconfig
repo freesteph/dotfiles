@@ -6,6 +6,9 @@
 [includeIf "gitdir:~/build/gds/"]
     path = ~/build/gds/.gitconfig
 
+[includeIf "gitdir:~/build/betagouv/"]
+    path = ~/build/betagouv/.gitconfig
+
 [includeIf "gitdir:~/build/unboxed/"]
     path = ~/build/unboxed/.gitconfig
 
