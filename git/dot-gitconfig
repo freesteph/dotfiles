@@ -1,0 +1,28 @@
+[user]
+	email = stephane.maniaci@gmail.com
+	name = Stéphane Maniaci
+	signingkey = 07405EC4E981CF869
+
+[includeIf "gitdir:~/build/gds/"]
+    path = ~/build/gds/.gitconfig
+
+[includeIf "gitdir:~/build/betagouv/"]
+    path = ~/build/betagouv/.gitconfig
+
+[includeIf "gitdir:~/build/unboxed/"]
+    path = ~/build/unboxed/.gitconfig
+
+[includeIf "gitdir:~/build/ScottishParliament/"]
+    path = ~/build/unboxed/.gitconfig
+
+[github]
+	user = freesteph
+
+[commit]
+	gpgsign = true
+
+[diff "gpg"]
+	textconv = gpg --no-tty --decrypt
+
+[color]
+	ui = true
