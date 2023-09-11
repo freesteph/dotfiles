@@ -158,7 +158,8 @@
   :config
   (which-key-mode 1)
   (setq which-key-popup-type 'side-window
-        which-key-side-window-location 'left))
+        which-key-side-window-location 'left
+        which-key-max-description-length 100))
 
 (global-set-key (kbd "C-x RET") 'toggle-frame-fullscreen)
 
