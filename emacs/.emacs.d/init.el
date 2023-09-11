@@ -66,43 +66,7 @@
                     :weight 'normal
                     :width 'normal
                     :slant 'italic
-                    :height 120)
-
-;; ;; completion
-;; (use-package selectrum
-;;   :straight t
-;;   :config (selectrum-mode))
-
-;; (use-package selectrum-prescient
-;;   :straight t)
-
-;; ;; to make sorting and filtering more intelligent
-;; (selectrum-prescient-mode +1)
-
-;; ;; to save your command history on disk, so the sorting gets more
-;; ;; intelligent over time
-;; (prescient-persist-mode +1)
-
-(use-package swiper
-  :straight t
-  :config (ivy-mode 1)
-  :bind (("C-s" . counsel-grep-or-swiper)
-         ("M-x" . counsel-M-x)
-         ("M-/" . counsel-company)
-         ("M-y" . counsel-yank-pop)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h f" . counsel-describe-function)
-         ("C-h v" . counsel-describe-variable)))
-
-(use-package ivy-prescient
-  :straight t
-  :init (ivy-prescient-mode))
-
-(use-package company
-  :straight t
-  :config (setq company-dabbrev-downcase nil)
-  :init (global-company-mode)
-  :diminish company-mode)
+                    :height 130)
 
 (use-package projectile
   :straight t
@@ -113,17 +77,9 @@
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map)))
 
-(use-package counsel-projectile
-  :straight t
-  :config
-  (counsel-projectile-mode))
-
-(use-package expand-region
-  :straight t
-  :bind ("M-=" . er/expand-region))
-
 ;; mac path something flycheck
 (use-package exec-path-from-shell
+  :straight t
   :config
   (exec-path-from-shell-initialize))
 
@@ -151,12 +107,6 @@
   :straight t
   :bind ("C-x g" . magit-status))
 
-(use-package forge
-  :straight t)
-
-;; remove whitespace on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; display time
 (display-time-mode 't)
 
@@ -175,12 +125,6 @@
   :straight t
   :bind ("C-M-=" . js-import))
 
-;; prettier
-(use-package prettier-js
-  :straight t
-  :init
-  (add-hook 'js-mode-hook 'prettier-js-mode))
-
 ;; css
 (setq css-indent-offset 2)
 
@@ -198,14 +142,6 @@
 (use-package markdown-mode
   :straight t
   :config)
-
-
-;; (use-package deft
-;;   :config
-;;   (setq
-;;    deft-directory (expand-file-name "~/build/notes")
-;;    deft-default-extension "org"
-;;    deft-auto-save-interval 0.0))
 
 (use-package minions
   :straight t
@@ -226,6 +162,9 @@
 
 (global-set-key (kbd "C-x RET") 'toggle-frame-fullscreen)
 
+;; remove whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; dired
 ;; use ls coloured, long listing, all files, vertical, omitting group
 (setf dired-listing-switches "-Ghla1o"
@@ -235,9 +174,6 @@
 ;; GPG
 (setf epg-pinentry-mode 'loopback)
 
-;; ;; paint colour hexs
-;; (use-package rainbow-mode
-;;   :config (rainbow-mode))
 
 ;; flash the modeline rather than the other absurd options
 (use-package mode-line-bell
@@ -265,12 +201,6 @@
 (use-package docker
   :straight t
   :bind ("C-c d" . docker))
-
-;; vterm kills
-(use-package vterm
-  :straight t
-  :config (setf
-           vterm-kill-buffer-on-exit t))
 
 ;; unfill
 (use-package unfill
@@ -320,31 +250,10 @@
   :config
   (setf graphviz-dot-preview-extension "svg"))
 
-(use-package emms
-  :straight t
-  :config
-  (progn
-    (require 'emms-setup)
-    (emms-standard)
-    (emms-default-players))
-  (setf emms-source-file-default-directory "~/Music")
-  :bind ("<pause>" . emms-pause))
-
 (use-package feature-mode
   :straight t
   :config
   (setf feature-docker-compose-container "web"))
-
-(use-package soundklaus
-  :straight t
-  :commands
-  (soundklaus-activities
-   soundklaus-connect
-   soundklaus-my-favorites
-   soundklaus-my-playlists
-   soundklaus-my-tracks
-   soundklaus-playlists
-   soundklaus-tracks))
 
 (use-package browse-at-remote
   :straight t)
@@ -353,11 +262,6 @@
   :straight t
   :config
   (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map))
-
-(use-package ivy-xref
-  :straight t
-  :config
-  (setf xref-show-definitions-function #'ivy-xref-show-defs))
 
 (use-package gif-screencast
   :straight t
@@ -381,12 +285,6 @@
 (add-hook 'after-init-hook 'spm/load-agenda)
 
 (straight-use-package 'yari)
-
-(use-package ivy-pass
-  :straight (:host github
-             :repo "ecraven/ivy-pass"
-             :fork (:host github :repo "freesteph/ivy-pass"))
-  :config (global-set-key (kbd "C-c C-p") 'ivy-pass))
 
 (use-package terraform-mode
   :straight t)
